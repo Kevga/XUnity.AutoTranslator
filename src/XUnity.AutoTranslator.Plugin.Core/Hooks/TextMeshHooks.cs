@@ -85,14 +85,14 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks.UGUI
 
       static void Postfix( Component __instance )
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          __instance = (Component)Il2CppUtilities.CreateProxyComponentWithDerivedType( __instance.Pointer, UnityTypes.TextMesh.ClrType );
 #endif
 
          _Postfix( __instance );
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       static IntPtr TargetMethodPointer()
       {
          return UnityTypes.TextMesh_Methods.IL2CPP.set_text;
@@ -144,7 +144,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks.UGUI
             var tms = __instance.GetComponentsInChildren( UnityTypes.TextMesh.UnityType );
             foreach( var tm in tms )
             {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
                var comp = Il2CppUtilities.CreateProxyComponentWithDerivedType( tm.Pointer, UnityTypes.TextMesh.ClrType );
                AutoTranslationPlugin.Current.Hook_TextChanged( comp, true );
 #else
@@ -159,7 +159,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks.UGUI
          _Postfix( __instance, value );
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       static IntPtr TargetMethodPointer()
       {
          return UnityTypes.GameObject_Methods.IL2CPP.SetActive;

@@ -2023,7 +2023,7 @@ namespace XUnity.AutoTranslator.Plugin.Core
                return null;
          }
 
-         // Ensure that we actually want to translate this text and its owning UI element. 
+         // Ensure that we actually want to translate this text and its owning UI element.
          if( !shouldIgnore && ( ignoreComponentState || ui.IsComponentActive() ) )
          {
             if( context == null && info != null )
@@ -2216,7 +2216,7 @@ namespace XUnity.AutoTranslator.Plugin.Core
             info.IsStabilizingText = true;
 
             // start a coroutine, that will execute once the string of the UI text has stopped
-            // changing. For all texts except 'story' texts, this will add a delay for exactly 
+            // changing. For all texts except 'story' texts, this will add a delay for exactly
             // 0.5s to the translation. This is barely noticable.
             //
             // on the other hand, for 'story' texts, this will take the time that it takes
@@ -3490,7 +3490,7 @@ namespace XUnity.AutoTranslator.Plugin.Core
             var layer =
 #if MANAGED
                LayerMask.LayerToName( obj.layer );
-#elif IL2CPP
+#elif IL2CPP || IL2CPPBE2
                obj.layer.ToString();
 #endif
             var components = string.Join( ", ", obj.GetComponents<Component>().Select( x =>

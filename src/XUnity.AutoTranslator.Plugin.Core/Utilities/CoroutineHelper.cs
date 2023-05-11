@@ -50,7 +50,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Utilities
       /// <returns></returns>
       public static Coroutine Start( IEnumerator coroutine )
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          var wrapper = new Il2CppSystem.Collections.IEnumerator( new Il2CppManagedEnumerator( coroutine ).Pointer );
          return PluginLoader.MonoBehaviour.StartCoroutine( wrapper );
 #else

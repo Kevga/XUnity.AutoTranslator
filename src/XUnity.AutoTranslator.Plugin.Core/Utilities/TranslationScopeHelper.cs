@@ -65,7 +65,7 @@ namespace XUnity.AutoTranslator.Plugin.Utilities
 
       public static void RegisterSceneLoadCallback( Action<int> sceneLoaded )
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          UnityTypes.SceneManager_Methods.add_sceneLoaded( new Action<Scene, LoadSceneMode>( ( scene, mode ) => sceneLoaded( scene.buildIndex ) ) );
 #else
          SceneManagerLoader.EnableSceneLoadScanInternal( sceneLoaded );

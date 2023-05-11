@@ -7,7 +7,7 @@ namespace XUnity.Common.Constants
 {
    public class TypeContainer
    {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public TypeContainer( Il2CppSystem.Type unityType, Type clrType, IntPtr classPointer )
       {
          UnityType = unityType;
@@ -24,14 +24,14 @@ namespace XUnity.Common.Constants
 #endif
       public Type ClrType { get; }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public Il2CppSystem.Type UnityType { get; }
       public IntPtr ClassPointer { get; }
 #else
       public Type UnityType { get; }
 #endif
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public bool IsAssignableFrom( Il2CppSystem.Type unityType )
 #else
       public bool IsAssignableFrom( Type unityType )

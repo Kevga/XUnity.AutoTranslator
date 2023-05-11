@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+
 using UnityEngine;
 using XUnity.Common.Constants;
 using XUnity.Common.Logging;
@@ -10,6 +11,8 @@ using XUnity.Common.Utilities;
 
 #if IL2CPP
 using UnhollowerRuntimeLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime;
 #endif
 
 namespace XUnity.AutoTranslator.Plugin.Core.Utilities

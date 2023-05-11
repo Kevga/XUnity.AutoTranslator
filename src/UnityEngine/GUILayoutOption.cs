@@ -8,10 +8,16 @@ using System.Text;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
+#if IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes;
+#endif
+
 namespace UnityEngine
 {
 #if IL2CPP
    public sealed class GUILayoutOption : UnhollowerBaseLib.Il2CppObjectBase
+#elif IL2CPPBE2
+   public sealed class GUILayoutOption : Il2CppObjectBase
 #else
    public sealed class GUILayoutOption
 #endif
@@ -38,13 +44,13 @@ namespace UnityEngine
 
       internal object value;
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       internal GUILayoutOption( Type type, object value ) : base( IntPtr.Zero ) => throw new NotImplementedException();
 #else
       internal GUILayoutOption( Type type, object value ) => throw new NotImplementedException();
 #endif
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public GUILayoutOption( IntPtr pointer ) : base( pointer ) => throw new NotImplementedException();
 #endif
    }

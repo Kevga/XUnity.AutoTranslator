@@ -2,6 +2,8 @@
 
 #if IL2CPP
 using UnhollowerBaseLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes;
 #endif
 
 namespace XUnity.Common.Utilities
@@ -9,7 +11,7 @@ namespace XUnity.Common.Utilities
    /// <summary>
    /// WARNING: Pubternal API (internal). Do not use. May change during any update.
    /// </summary>
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
    public class UnityObjectReferenceComparer : IEqualityComparer<Il2CppObjectBase>
 #else
    public class UnityObjectReferenceComparer : IEqualityComparer<object>
@@ -20,7 +22,7 @@ namespace XUnity.Common.Utilities
       /// </summary>
       public static readonly UnityObjectReferenceComparer Default = new UnityObjectReferenceComparer();
 
-#if IL2CPP
+#if IL2CPP|| IL2CPPBE2
       /// <summary>
       /// WARNING: Pubternal API (internal). Do not use. May change during any update.
       /// </summary>
@@ -52,7 +54,7 @@ namespace XUnity.Common.Utilities
       /// </summary>
       /// <param name="obj"></param>
       /// <returns></returns>
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public int GetHashCode( Il2CppObjectBase obj )
       {
          return obj.Pointer.GetHashCode();

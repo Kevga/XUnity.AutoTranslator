@@ -8,6 +8,10 @@ using System.Text;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
+#if IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
+
 namespace UnityEngine
 {
    public class GUILayout
@@ -22,7 +26,8 @@ namespace UnityEngine
 
          private readonly GUIStyle m_Style;
 
-         internal LayoutedWindow( GUI.WindowFunction f, Rect screenRect, GUIContent content, GUILayoutOption[] options, GUIStyle style )
+         internal LayoutedWindow( GUI.WindowFunction f, Rect screenRect, GUIContent content, GUILayoutOption[] options,
+            GUIStyle style )
          {
             m_Func = f;
             m_ScreenRect = screenRect;
@@ -144,17 +149,9 @@ namespace UnityEngine
 
       public class ScrollViewScope : GUI.Scope
       {
-         public Vector2 scrollPosition
-         {
-            get;
-            private set;
-         }
+         public Vector2 scrollPosition { get; private set; }
 
-         public bool handleScrollWheel
-         {
-            get;
-            set;
-         }
+         public bool handleScrollWheel { get; set; }
 
          public ScrollViewScope( Vector2 scrollPosition, params GUILayoutOption[] options )
          {
@@ -162,13 +159,15 @@ namespace UnityEngine
             this.scrollPosition = BeginScrollView( scrollPosition, options );
          }
 
-         public ScrollViewScope( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical, params GUILayoutOption[] options )
+         public ScrollViewScope( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical,
+            params GUILayoutOption[] options )
          {
             handleScrollWheel = true;
             this.scrollPosition = BeginScrollView( scrollPosition, alwaysShowHorizontal, alwaysShowVertical, options );
          }
 
-         public ScrollViewScope( Vector2 scrollPosition, GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar, params GUILayoutOption[] options )
+         public ScrollViewScope( Vector2 scrollPosition, GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar,
+            params GUILayoutOption[] options )
          {
             handleScrollWheel = true;
             this.scrollPosition = BeginScrollView( scrollPosition, horizontalScrollbar, verticalScrollbar, options );
@@ -180,16 +179,21 @@ namespace UnityEngine
             this.scrollPosition = BeginScrollView( scrollPosition, style, options );
          }
 
-         public ScrollViewScope( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical, GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar, params GUILayoutOption[] options )
+         public ScrollViewScope( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical,
+            GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar, params GUILayoutOption[] options )
          {
             handleScrollWheel = true;
-            this.scrollPosition = BeginScrollView( scrollPosition, alwaysShowHorizontal, alwaysShowVertical, horizontalScrollbar, verticalScrollbar, options );
+            this.scrollPosition = BeginScrollView( scrollPosition, alwaysShowHorizontal, alwaysShowVertical,
+               horizontalScrollbar, verticalScrollbar, options );
          }
 
-         public ScrollViewScope( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical, GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar, GUIStyle background, params GUILayoutOption[] options )
+         public ScrollViewScope( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical,
+            GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar, GUIStyle background,
+            params GUILayoutOption[] options )
          {
             handleScrollWheel = true;
-            this.scrollPosition = BeginScrollView( scrollPosition, alwaysShowHorizontal, alwaysShowVertical, horizontalScrollbar, verticalScrollbar, background, options );
+            this.scrollPosition = BeginScrollView( scrollPosition, alwaysShowHorizontal, alwaysShowVertical,
+               horizontalScrollbar, verticalScrollbar, background, options );
          }
 
          protected override void CloseScope()
@@ -220,6 +224,8 @@ namespace UnityEngine
 
 #if IL2CPP
       public static void Label( string text, GUIStyle style, UnhollowerBaseLib.Il2CppReferenceArray<GUILayoutOption> options )
+#elif IL2CPPBE2
+      public static void Label( string text, GUIStyle style, Il2CppReferenceArray<GUILayoutOption> options )
 #else
       public static void Label( string text, GUIStyle style, params GUILayoutOption[] options )
 #endif
@@ -232,7 +238,8 @@ namespace UnityEngine
          DoLabel( content, style, options );
       }
 
-      private static void DoLabel( GUIContent content, GUIStyle style, GUILayoutOption[] options ) => throw new NotImplementedException();
+      private static void DoLabel( GUIContent content, GUIStyle style, GUILayoutOption[] options ) =>
+         throw new NotImplementedException();
 
       public static void Box( Texture image, params GUILayoutOption[] options )
       {
@@ -264,7 +271,8 @@ namespace UnityEngine
          DoBox( content, style, options );
       }
 
-      private static void DoBox( GUIContent content, GUIStyle style, GUILayoutOption[] options ) => throw new NotImplementedException();
+      private static void DoBox( GUIContent content, GUIStyle style, GUILayoutOption[] options ) =>
+         throw new NotImplementedException();
 
       public static bool Button( Texture image, params GUILayoutOption[] options )
       {
@@ -293,11 +301,15 @@ namespace UnityEngine
 
 #if IL2CPP
       public static bool Button( GUIContent content, GUIStyle style, UnhollowerBaseLib.Il2CppReferenceArray<GUILayoutOption> options ) => throw new NotImplementedException();
+#elif IL2CPPBE2
+      public static bool Button( GUIContent content, GUIStyle style, Il2CppReferenceArray<GUILayoutOption> options ) => throw new NotImplementedException();
 #else
-      public static bool Button( GUIContent content, GUIStyle style, params GUILayoutOption[] options ) => throw new NotImplementedException();
+      public static bool Button( GUIContent content, GUIStyle style, params GUILayoutOption[] options ) =>
+         throw new NotImplementedException();
 #endif
 
-      private static bool DoButton( GUIContent content, GUIStyle style, GUILayoutOption[] options ) => throw new NotImplementedException();
+      private static bool DoButton( GUIContent content, GUIStyle style, GUILayoutOption[] options ) =>
+         throw new NotImplementedException();
 
       public static bool RepeatButton( Texture image, params GUILayoutOption[] options )
       {
@@ -329,7 +341,8 @@ namespace UnityEngine
          return DoRepeatButton( content, style, options );
       }
 
-      private static bool DoRepeatButton( GUIContent content, GUIStyle style, GUILayoutOption[] options ) => throw new NotImplementedException();
+      private static bool DoRepeatButton( GUIContent content, GUIStyle style, GUILayoutOption[] options ) =>
+         throw new NotImplementedException();
 
       public static string TextField( string text, params GUILayoutOption[] options )
       {
@@ -356,17 +369,20 @@ namespace UnityEngine
          return PasswordField( password, maskChar, -1, GUI.skin.textField, options );
       }
 
-      public static string PasswordField( string password, char maskChar, int maxLength, params GUILayoutOption[] options )
+      public static string PasswordField( string password, char maskChar, int maxLength,
+         params GUILayoutOption[] options )
       {
          return PasswordField( password, maskChar, maxLength, GUI.skin.textField, options );
       }
 
-      public static string PasswordField( string password, char maskChar, GUIStyle style, params GUILayoutOption[] options )
+      public static string PasswordField( string password, char maskChar, GUIStyle style,
+         params GUILayoutOption[] options )
       {
          return PasswordField( password, maskChar, -1, style, options );
       }
 
-      public static string PasswordField( string password, char maskChar, int maxLength, GUIStyle style, params GUILayoutOption[] options ) => throw new NotImplementedException();
+      public static string PasswordField( string password, char maskChar, int maxLength, GUIStyle style,
+         params GUILayoutOption[] options ) => throw new NotImplementedException();
 
       public static string TextArea( string text, params GUILayoutOption[] options )
       {
@@ -388,7 +404,8 @@ namespace UnityEngine
          return DoTextField( text, maxLength, multiline: true, style, options );
       }
 
-      private static string DoTextField( string text, int maxLength, bool multiline, GUIStyle style, GUILayoutOption[] options ) => throw new NotImplementedException();
+      private static string DoTextField( string text, int maxLength, bool multiline, GUIStyle style,
+         GUILayoutOption[] options ) => throw new NotImplementedException();
 
       public static bool Toggle( bool value, Texture image, params GUILayoutOption[] options )
       {
@@ -420,7 +437,8 @@ namespace UnityEngine
          return DoToggle( value, content, style, options );
       }
 
-      private static bool DoToggle( bool value, GUIContent content, GUIStyle style, GUILayoutOption[] options ) => throw new NotImplementedException();
+      private static bool DoToggle( bool value, GUIContent content, GUIStyle style, GUILayoutOption[] options ) =>
+         throw new NotImplementedException();
 
       public static int Toolbar( int selected, string[] texts, params GUILayoutOption[] options )
       {
@@ -447,7 +465,9 @@ namespace UnityEngine
          return Toolbar( selected, GUIContent.Temp( images ), style, options );
       }
 
-      public static int Toolbar( int selected, GUIContent[] contents, GUIStyle style, params GUILayoutOption[] options ) => throw new NotImplementedException();
+      public static int
+         Toolbar( int selected, GUIContent[] contents, GUIStyle style, params GUILayoutOption[] options ) =>
+         throw new NotImplementedException();
 
       public static int SelectionGrid( int selected, string[] texts, int xCount, params GUILayoutOption[] options )
       {
@@ -459,60 +479,76 @@ namespace UnityEngine
          return SelectionGrid( selected, GUIContent.Temp( images ), xCount, GUI.skin.button, options );
       }
 
-      public static int SelectionGrid( int selected, GUIContent[] content, int xCount, params GUILayoutOption[] options )
+      public static int SelectionGrid( int selected, GUIContent[] content, int xCount,
+         params GUILayoutOption[] options )
       {
          return SelectionGrid( selected, content, xCount, GUI.skin.button, options );
       }
 
-      public static int SelectionGrid( int selected, string[] texts, int xCount, GUIStyle style, params GUILayoutOption[] options )
+      public static int SelectionGrid( int selected, string[] texts, int xCount, GUIStyle style,
+         params GUILayoutOption[] options )
       {
          return SelectionGrid( selected, GUIContent.Temp( texts ), xCount, style, options );
       }
 
-      public static int SelectionGrid( int selected, Texture[] images, int xCount, GUIStyle style, params GUILayoutOption[] options )
+      public static int SelectionGrid( int selected, Texture[] images, int xCount, GUIStyle style,
+         params GUILayoutOption[] options )
       {
          return SelectionGrid( selected, GUIContent.Temp( images ), xCount, style, options );
       }
 
-      public static int SelectionGrid( int selected, GUIContent[] contents, int xCount, GUIStyle style, params GUILayoutOption[] options ) => throw new NotImplementedException();
+      public static int SelectionGrid( int selected, GUIContent[] contents, int xCount, GUIStyle style,
+         params GUILayoutOption[] options ) => throw new NotImplementedException();
 
-      public static float HorizontalSlider( float value, float leftValue, float rightValue, params GUILayoutOption[] options )
+      public static float HorizontalSlider( float value, float leftValue, float rightValue,
+         params GUILayoutOption[] options )
       {
-         return DoHorizontalSlider( value, leftValue, rightValue, GUI.skin.horizontalSlider, GUI.skin.horizontalSliderThumb, options );
+         return DoHorizontalSlider( value, leftValue, rightValue, GUI.skin.horizontalSlider,
+            GUI.skin.horizontalSliderThumb, options );
       }
 
-      public static float HorizontalSlider( float value, float leftValue, float rightValue, GUIStyle slider, GUIStyle thumb, params GUILayoutOption[] options )
+      public static float HorizontalSlider( float value, float leftValue, float rightValue, GUIStyle slider,
+         GUIStyle thumb, params GUILayoutOption[] options )
       {
          return DoHorizontalSlider( value, leftValue, rightValue, slider, thumb, options );
       }
 
-      private static float DoHorizontalSlider( float value, float leftValue, float rightValue, GUIStyle slider, GUIStyle thumb, GUILayoutOption[] options ) => throw new NotImplementedException();
+      private static float DoHorizontalSlider( float value, float leftValue, float rightValue, GUIStyle slider,
+         GUIStyle thumb, GUILayoutOption[] options ) => throw new NotImplementedException();
 
-      public static float VerticalSlider( float value, float leftValue, float rightValue, params GUILayoutOption[] options )
+      public static float VerticalSlider( float value, float leftValue, float rightValue,
+         params GUILayoutOption[] options )
       {
-         return DoVerticalSlider( value, leftValue, rightValue, GUI.skin.verticalSlider, GUI.skin.verticalSliderThumb, options );
+         return DoVerticalSlider( value, leftValue, rightValue, GUI.skin.verticalSlider, GUI.skin.verticalSliderThumb,
+            options );
       }
 
-      public static float VerticalSlider( float value, float leftValue, float rightValue, GUIStyle slider, GUIStyle thumb, params GUILayoutOption[] options )
+      public static float VerticalSlider( float value, float leftValue, float rightValue, GUIStyle slider,
+         GUIStyle thumb, params GUILayoutOption[] options )
       {
          return DoVerticalSlider( value, leftValue, rightValue, slider, thumb, options );
       }
 
-      private static float DoVerticalSlider( float value, float leftValue, float rightValue, GUIStyle slider, GUIStyle thumb, params GUILayoutOption[] options ) => throw new NotImplementedException();
+      private static float DoVerticalSlider( float value, float leftValue, float rightValue, GUIStyle slider,
+         GUIStyle thumb, params GUILayoutOption[] options ) => throw new NotImplementedException();
 
-      public static float HorizontalScrollbar( float value, float size, float leftValue, float rightValue, params GUILayoutOption[] options )
+      public static float HorizontalScrollbar( float value, float size, float leftValue, float rightValue,
+         params GUILayoutOption[] options )
       {
          return HorizontalScrollbar( value, size, leftValue, rightValue, GUI.skin.horizontalScrollbar, options );
       }
 
-      public static float HorizontalScrollbar( float value, float size, float leftValue, float rightValue, GUIStyle style, params GUILayoutOption[] options ) => throw new NotImplementedException();
+      public static float HorizontalScrollbar( float value, float size, float leftValue, float rightValue,
+         GUIStyle style, params GUILayoutOption[] options ) => throw new NotImplementedException();
 
-      public static float VerticalScrollbar( float value, float size, float topValue, float bottomValue, params GUILayoutOption[] options )
+      public static float VerticalScrollbar( float value, float size, float topValue, float bottomValue,
+         params GUILayoutOption[] options )
       {
          return VerticalScrollbar( value, size, topValue, bottomValue, GUI.skin.verticalScrollbar, options );
       }
 
-      public static float VerticalScrollbar( float value, float size, float topValue, float bottomValue, GUIStyle style, params GUILayoutOption[] options ) => throw new NotImplementedException();
+      public static float VerticalScrollbar( float value, float size, float topValue, float bottomValue, GUIStyle style,
+         params GUILayoutOption[] options ) => throw new NotImplementedException();
 
       public static void Space( float pixels ) => throw new NotImplementedException();
 
@@ -538,7 +574,8 @@ namespace UnityEngine
          BeginHorizontal( GUIContent.Temp( image ), style, options );
       }
 
-      public static void BeginHorizontal( GUIContent content, GUIStyle style, params GUILayoutOption[] options ) => throw new NotImplementedException();
+      public static void BeginHorizontal( GUIContent content, GUIStyle style, params GUILayoutOption[] options ) =>
+         throw new NotImplementedException();
 
       public static void EndHorizontal() => throw new NotImplementedException();
 
@@ -562,7 +599,8 @@ namespace UnityEngine
          BeginVertical( GUIContent.Temp( image ), style, options );
       }
 
-      public static void BeginVertical( GUIContent content, GUIStyle style, params GUILayoutOption[] options ) => throw new NotImplementedException();
+      public static void BeginVertical( GUIContent content, GUIStyle style, params GUILayoutOption[] options ) =>
+         throw new NotImplementedException();
 
       public static void EndVertical() => throw new NotImplementedException();
 
@@ -601,23 +639,29 @@ namespace UnityEngine
          BeginArea( screenRect, GUIContent.Temp( image ), style );
       }
 
-      public static void BeginArea( Rect screenRect, GUIContent content, GUIStyle style ) => throw new NotImplementedException();
+      public static void BeginArea( Rect screenRect, GUIContent content, GUIStyle style ) =>
+         throw new NotImplementedException();
 
       public static void EndArea() => throw new NotImplementedException();
 
       public static Vector2 BeginScrollView( Vector2 scrollPosition, params GUILayoutOption[] options )
       {
-         return BeginScrollView( scrollPosition, alwaysShowHorizontal: false, alwaysShowVertical: false, GUI.skin.horizontalScrollbar, GUI.skin.verticalScrollbar, GUI.skin.scrollView, options );
+         return BeginScrollView( scrollPosition, alwaysShowHorizontal: false, alwaysShowVertical: false,
+            GUI.skin.horizontalScrollbar, GUI.skin.verticalScrollbar, GUI.skin.scrollView, options );
       }
 
-      public static Vector2 BeginScrollView( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical, params GUILayoutOption[] options )
+      public static Vector2 BeginScrollView( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical,
+         params GUILayoutOption[] options )
       {
-         return BeginScrollView( scrollPosition, alwaysShowHorizontal, alwaysShowVertical, GUI.skin.horizontalScrollbar, GUI.skin.verticalScrollbar, GUI.skin.scrollView, options );
+         return BeginScrollView( scrollPosition, alwaysShowHorizontal, alwaysShowVertical, GUI.skin.horizontalScrollbar,
+            GUI.skin.verticalScrollbar, GUI.skin.scrollView, options );
       }
 
-      public static Vector2 BeginScrollView( Vector2 scrollPosition, GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar, params GUILayoutOption[] options )
+      public static Vector2 BeginScrollView( Vector2 scrollPosition, GUIStyle horizontalScrollbar,
+         GUIStyle verticalScrollbar, params GUILayoutOption[] options )
       {
-         return BeginScrollView( scrollPosition, alwaysShowHorizontal: false, alwaysShowVertical: false, horizontalScrollbar, verticalScrollbar, GUI.skin.scrollView, options );
+         return BeginScrollView( scrollPosition, alwaysShowHorizontal: false, alwaysShowVertical: false,
+            horizontalScrollbar, verticalScrollbar, GUI.skin.scrollView, options );
       }
 
       public static Vector2 BeginScrollView( Vector2 scrollPosition, GUIStyle style )
@@ -641,15 +685,20 @@ namespace UnityEngine
             gUIStyle2 = GUI.skin.horizontalScrollbar;
          }
 
-         return BeginScrollView( scrollPosition, alwaysShowHorizontal: false, alwaysShowVertical: false, gUIStyle2, gUIStyle, style, options );
+         return BeginScrollView( scrollPosition, alwaysShowHorizontal: false, alwaysShowVertical: false, gUIStyle2,
+            gUIStyle, style, options );
       }
 
-      public static Vector2 BeginScrollView( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical, GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar, params GUILayoutOption[] options )
+      public static Vector2 BeginScrollView( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical,
+         GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar, params GUILayoutOption[] options )
       {
-         return BeginScrollView( scrollPosition, alwaysShowHorizontal, alwaysShowVertical, horizontalScrollbar, verticalScrollbar, GUI.skin.scrollView, options );
+         return BeginScrollView( scrollPosition, alwaysShowHorizontal, alwaysShowVertical, horizontalScrollbar,
+            verticalScrollbar, GUI.skin.scrollView, options );
       }
 
-      public static Vector2 BeginScrollView( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical, GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar, GUIStyle background, params GUILayoutOption[] options ) => throw new NotImplementedException();
+      public static Vector2 BeginScrollView( Vector2 scrollPosition, bool alwaysShowHorizontal, bool alwaysShowVertical,
+         GUIStyle horizontalScrollbar, GUIStyle verticalScrollbar, GUIStyle background,
+         params GUILayoutOption[] options ) => throw new NotImplementedException();
 
       public static void EndScrollView()
       {
@@ -658,37 +707,44 @@ namespace UnityEngine
 
       internal static void EndScrollView( bool handleScrollWheel ) => throw new NotImplementedException();
 
-      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, string text, params GUILayoutOption[] options )
+      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, string text,
+         params GUILayoutOption[] options )
       {
          return DoWindow( id, screenRect, func, GUIContent.Temp( text ), GUI.skin.window, options );
       }
 
-      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, Texture image, params GUILayoutOption[] options )
+      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, Texture image,
+         params GUILayoutOption[] options )
       {
          return DoWindow( id, screenRect, func, GUIContent.Temp( image ), GUI.skin.window, options );
       }
 
-      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, GUIContent content, params GUILayoutOption[] options )
+      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, GUIContent content,
+         params GUILayoutOption[] options )
       {
          return DoWindow( id, screenRect, func, content, GUI.skin.window, options );
       }
 
-      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, string text, GUIStyle style, params GUILayoutOption[] options )
+      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, string text, GUIStyle style,
+         params GUILayoutOption[] options )
       {
          return DoWindow( id, screenRect, func, GUIContent.Temp( text ), style, options );
       }
 
-      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, Texture image, GUIStyle style, params GUILayoutOption[] options )
+      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, Texture image, GUIStyle style,
+         params GUILayoutOption[] options )
       {
          return DoWindow( id, screenRect, func, GUIContent.Temp( image ), style, options );
       }
 
-      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, GUIContent content, GUIStyle style, params GUILayoutOption[] options )
+      public static Rect Window( int id, Rect screenRect, GUI.WindowFunction func, GUIContent content, GUIStyle style,
+         params GUILayoutOption[] options )
       {
          return DoWindow( id, screenRect, func, content, style, options );
       }
 
-      private static Rect DoWindow( int id, Rect screenRect, GUI.WindowFunction func, GUIContent content, GUIStyle style, GUILayoutOption[] options ) => throw new NotImplementedException();
+      private static Rect DoWindow( int id, Rect screenRect, GUI.WindowFunction func, GUIContent content,
+         GUIStyle style, GUILayoutOption[] options ) => throw new NotImplementedException();
 
       public static GUILayoutOption Width( float width )
       {

@@ -440,7 +440,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Extensions
          return null;
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public static Component CreateTextMeshProDerivedProxy( this Component ui )
       {
          var unityType = ui.GetUnityType();
@@ -491,7 +491,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Extensions
          var unityType = ui.GetUnityType();
          if( UnityTypes.UILabel != null && UnityTypes.UILabel.IsAssignableFrom( unityType ) )
          {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
             return (Component)Il2CppUtilities.CreateProxyComponentWithDerivedType( ui.Pointer, UnityTypes.UILabel.ClrType );
 #else
             return ui;
@@ -500,7 +500,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Extensions
          return null;
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public static Component GetFirstComponentInSelfOrAncestor( this GameObject go, Il2CppSystem.Type type )
 #else
       public static Component GetFirstComponentInSelfOrAncestor( this GameObject go, Type type )

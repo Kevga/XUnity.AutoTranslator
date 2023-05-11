@@ -7,6 +7,12 @@ using UnityEngine;
 using XUnity.AutoTranslator.Plugin.Core.Configuration;
 using XUnity.Common.Logging;
 
+#if IL2CPP
+using UnhollowerRuntimeLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime.Injection;
+#endif
+
 namespace XUnity.AutoTranslator.Plugin.Core
 {
    /// <summary>
@@ -100,12 +106,12 @@ namespace XUnity.AutoTranslator.Plugin.Core
       }
 #endif
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       internal class AutoTranslatorProxyBehaviour : MonoBehaviour
       {
          static AutoTranslatorProxyBehaviour()
          {
-            UnhollowerRuntimeLib.ClassInjector.RegisterTypeInIl2Cpp<AutoTranslatorProxyBehaviour>();
+            ClassInjector.RegisterTypeInIl2Cpp<AutoTranslatorProxyBehaviour>();
          }
 
          public AutoTranslatorProxyBehaviour( IntPtr value ) : base( value )

@@ -1,4 +1,4 @@
-﻿#if IL2CPP
+﻿#if IL2CPP || IL2CPPBE2
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System;
@@ -6,9 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using UnhollowerBaseLib;
 using UnityEngine;
 using XUnity.Common.Logging;
+
+#if IL2CPP
+using UnhollowerBaseLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime;
+using Il2CppInterop.Runtime.InteropTypes;
+#endif
 
 namespace XUnity.Common.Utilities
 {
@@ -69,7 +75,7 @@ namespace XUnity.Common.Utilities
 
       public static IntPtr GetIl2CppInstancePointer( uint gcHandle )
       {
-         var intPtr = UnhollowerBaseLib.IL2CPP.il2cpp_gchandle_get_target( gcHandle );
+         var intPtr = IL2CPP.il2cpp_gchandle_get_target( gcHandle );
          if( intPtr == IntPtr.Zero )
          {
             throw new ObjectCollectedException( "Object was garbage collected in IL2CPP domain" );
@@ -81,7 +87,7 @@ namespace XUnity.Common.Utilities
       {
          if( ourImagesMap == null )
          {
-            ourImagesMap = (Dictionary<string, IntPtr>)typeof( UnhollowerBaseLib.IL2CPP ).GetField( "ourImagesMap", BindingFlags.NonPublic | BindingFlags.Static ).GetValue( null );
+            ourImagesMap = (Dictionary<string, IntPtr>)typeof( IL2CPP ).GetField( "ourImagesMap", BindingFlags.NonPublic | BindingFlags.Static ).GetValue( null );
          }
 
          foreach( var image in ourImagesMap.Values )
@@ -101,7 +107,7 @@ namespace XUnity.Common.Utilities
          {
             if( !clazz.HasValue || clazz == IntPtr.Zero ) return IntPtr.Zero;
 
-            return UnhollowerBaseLib.IL2CPP.GetIl2CppMethod( clazz.Value, false, methodName, returnType.FullName, types.Select( x => x.FullName ).ToArray() );
+            return IL2CPP.GetIl2CppMethod( clazz.Value, false, methodName, returnType.FullName, types.Select( x => x.FullName ).ToArray() );
          }
          catch
          {

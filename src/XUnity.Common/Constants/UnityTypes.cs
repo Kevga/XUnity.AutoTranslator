@@ -14,13 +14,16 @@ using XUnity.Common.Utilities;
 #if IL2CPP
 using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using Il2CppInterop.Runtime;
 #endif
 
 namespace XUnity.Common.Constants
 {
    public static class UnityTypes
    {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       private static bool _initialized;
       private static readonly HashSet<string> Blacklist = new HashSet<string>( StringComparer.OrdinalIgnoreCase )
       {
@@ -281,7 +284,7 @@ namespace XUnity.Common.Constants
 
       public static class GameObject_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static class IL2CPP
          {
             public static readonly IntPtr SetActive = Il2CppUtilities.GetIl2CppMethod( UnityTypes.GameObject?.ClassPointer, "SetActive", typeof( void ), typeof( bool ) );
@@ -291,7 +294,7 @@ namespace XUnity.Common.Constants
 
       public static class TextMesh_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static class IL2CPP
          {
             public static readonly IntPtr set_text = Il2CppUtilities.GetIl2CppMethod( UnityTypes.TextMesh?.ClassPointer, "set_text", typeof( void ), typeof( string ) );
@@ -302,7 +305,7 @@ namespace XUnity.Common.Constants
 
       public static class Text_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static class IL2CPP
          {
             public static readonly IntPtr set_text = Il2CppUtilities.GetIl2CppMethod( UnityTypes.Text?.ClassPointer, "set_text", typeof( void ), typeof( string ) );
@@ -315,7 +318,7 @@ namespace XUnity.Common.Constants
 
       public static class InputField_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static class IL2CPP
          {
             public static readonly IntPtr get_placeholder = Il2CppUtilities.GetIl2CppMethod( UnityTypes.InputField?.ClassPointer, "get_placeholder", "UnityEngine.UI.Graphic" );
@@ -325,7 +328,7 @@ namespace XUnity.Common.Constants
 
       public static class TMP_Text_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static class IL2CPP
          {
             public static readonly IntPtr set_text = Il2CppUtilities.GetIl2CppMethod( UnityTypes.TMP_Text?.ClassPointer, "set_text", typeof( void ), typeof( string ) );
@@ -337,7 +340,7 @@ namespace XUnity.Common.Constants
 
       public static class TMP_InputField_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static class IL2CPP
          {
             public static readonly IntPtr get_placeholder = Il2CppUtilities.GetIl2CppMethod( UnityTypes.TMP_InputField?.ClassPointer, "get_placeholder", "UnityEngine.UI.Graphic" );
@@ -347,7 +350,7 @@ namespace XUnity.Common.Constants
 
       public static class TextMeshPro_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static class IL2CPP
          {
             public static readonly IntPtr OnEnable = Il2CppUtilities.GetIl2CppMethod( UnityTypes.TextMeshPro?.ClassPointer, "OnEnable", typeof( void ) );
@@ -357,7 +360,7 @@ namespace XUnity.Common.Constants
 
       public static class TextMeshProUGUI_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static class IL2CPP
          {
             public static readonly IntPtr OnEnable = Il2CppUtilities.GetIl2CppMethod( UnityTypes.TextMeshProUGUI?.ClassPointer, "OnEnable", typeof( void ) );
@@ -367,7 +370,7 @@ namespace XUnity.Common.Constants
 
       public static class UILabel_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static class IL2CPP
          {
             public static readonly IntPtr set_text = Il2CppUtilities.GetIl2CppMethod( UnityTypes.UILabel?.ClassPointer, "set_text", typeof( void ), typeof( string ) );
@@ -378,7 +381,7 @@ namespace XUnity.Common.Constants
 
       public static class UIRect_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static class IL2CPP
          {
             public static readonly IntPtr OnEnable = Il2CppUtilities.GetIl2CppMethod( UnityTypes.UIRect?.ClassPointer, "OnEnable", typeof( void ) );
@@ -401,7 +404,7 @@ namespace XUnity.Common.Constants
 
       public static class Texture2D_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static readonly Func<Texture2D, Il2CppStructArray<byte>, bool> LoadImage =
             (Func<Texture2D, Il2CppStructArray<byte>, bool>)ExpressionHelper.CreateTypedFastInvokeUnchecked(
                typeof( Texture2D ).GetMethod(
@@ -446,7 +449,7 @@ namespace XUnity.Common.Constants
 
       public static class ImageConversion_Methods
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          public static readonly Func<Texture2D, Il2CppStructArray<byte>, bool, bool> LoadImage =
             (Func<Texture2D, Il2CppStructArray<byte>, bool, bool>)ExpressionHelper.CreateTypedFastInvokeUnchecked(
                UnityTypes.ImageConversion?.ClrType.GetMethod(
@@ -511,7 +514,7 @@ namespace XUnity.Common.Constants
          return null;
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       private static TypeContainer FindType( string name )
       {
          Initialize();

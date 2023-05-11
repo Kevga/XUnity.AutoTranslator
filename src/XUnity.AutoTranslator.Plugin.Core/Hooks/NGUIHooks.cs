@@ -44,14 +44,14 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks.NGUI
 
       static void Postfix( Component __instance )
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          __instance = (Component)Il2CppUtilities.CreateProxyComponentWithDerivedType( __instance.Pointer, UnityTypes.UILabel.ClrType );
 #endif
 
          _Postfix( __instance );
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       static IntPtr TargetMethodPointer()
       {
          return UnityTypes.UILabel_Methods.IL2CPP.set_text;
@@ -110,7 +110,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks.NGUI
          }
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       static IntPtr TargetMethodPointer()
       {
          return UnityTypes.UIRect_Methods.IL2CPP.OnEnable;

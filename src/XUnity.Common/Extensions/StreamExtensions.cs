@@ -4,6 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+#if IL2CPP
+using UnhollowerBaseLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
+
 namespace XUnity.Common.Extensions
 {
    /// <summary>
@@ -63,7 +69,7 @@ namespace XUnity.Common.Extensions
          return ret;
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       /// <summary>
       /// Reads all data in the stream into a buffer. If possible specify the length of the stream as the initialLength.
       /// </summary>
@@ -81,7 +87,7 @@ namespace XUnity.Common.Extensions
             initialLength = 32768;
          }
 
-         var buffer = new UnhollowerBaseLib.Il2CppStructArray<byte>( initialLength );
+         var buffer = new Il2CppStructArray<byte>( initialLength );
          int read = 0;
 
          int chunk;

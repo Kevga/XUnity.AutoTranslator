@@ -38,7 +38,7 @@
 	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
 		<DefineConstants>IL2CPPBE2</DefineConstants>
 	</PropertyGroup>
-   
+
    <ItemGroup Condition="'$(TargetFramework)'=='net472'">
       <Reference Include="UnhollowerBaseLib">
          <HintPath>..\..\libs\Unhollower\UnhollowerBaseLib.dll</HintPath>
@@ -52,9 +52,21 @@
    </ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
-		<Reference Include="Il2Cppmscorlib">
-			<HintPath>..\..\libs\Proxies\Il2Cppmscorlib.dll</HintPath>
-		</Reference>
+        <Reference Include="Il2Cppmscorlib">
+            <HintPath>..\..\libs\BE2Proxies\Il2Cppmscorlib.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppInterop.Common">
+            <HintPath>..\..\libs\Il2CppInterop\Il2CppInterop.Common.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppInterop.Generator">
+            <HintPath>..\..\libs\Il2CppInterop\Il2CppInterop.Generator.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppInterop.HarmonySupport">
+            <HintPath>..\..\libs\Il2CppInterop\Il2CppInterop.HarmonySupport.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppInterop.Runtime">
+            <HintPath>..\..\libs\Il2CppInterop\Il2CppInterop.Runtime.dll</HintPath>
+        </Reference>
 	</ItemGroup>
 
   <ItemGroup>

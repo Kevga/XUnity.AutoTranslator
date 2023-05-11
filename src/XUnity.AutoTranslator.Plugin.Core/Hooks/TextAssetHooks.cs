@@ -10,6 +10,10 @@ using XUnity.Common.Harmony;
 using XUnity.Common.MonoMod;
 using XUnity.Common.Utilities;
 
+#if IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
+
 namespace XUnity.AutoTranslator.Plugin.Core.Hooks
 {
    internal static class TextAssetHooks
@@ -35,8 +39,10 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks
 
 #if MANAGED
       static void Postfix( TextAsset __instance, ref byte[] __result )
-#else
+#elif IL2CPP
       static void Postfix( TextAsset __instance, ref UnhollowerBaseLib.Il2CppStructArray<byte> __result )
+#elif IL2CPPBE2
+      static void Postfix( TextAsset __instance, ref Il2CppStructArray<byte> __result )
 #endif
       {
          if( __result == null ) return;

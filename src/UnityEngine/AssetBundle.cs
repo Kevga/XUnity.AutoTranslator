@@ -8,6 +8,10 @@ using System.Text;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
+#if IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
+
 namespace UnityEngine
 {
    public sealed class AssetBundle : Object
@@ -64,6 +68,8 @@ namespace UnityEngine
 
 #if IL2CPP
       public static extern AssetBundle LoadFromMemory( UnhollowerBaseLib.Il2CppStructArray<byte> binary, uint crc );
+#elif IL2CPPBE2
+      public static extern AssetBundle LoadFromMemory( Il2CppStructArray<byte> binary, uint crc );
 #else
       public static extern AssetBundle LoadFromMemory( byte[] binary, uint crc );
 #endif

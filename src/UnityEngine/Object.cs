@@ -12,10 +12,14 @@ using UnityEngine.SceneManagement;
 using UnhollowerBaseLib;
 #endif
 
+#if IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
+
 namespace UnityEngine
 {
    public class Object
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       : Il2CppSystem.Object
 #endif
    {
@@ -45,6 +49,9 @@ namespace UnityEngine
       public static void DestroyImmediate( Object obj ) => throw new NotImplementedException();
 
 #if IL2CPP
+      public static Il2CppReferenceArray<Object> FindObjectsOfType( Il2CppSystem.Type type ) => throw new NotImplementedException();
+      public static Il2CppArrayBase<T> FindObjectsOfType<T>() where T : Object => throw new NotImplementedException();
+#elif IL2CPPBE2
       public static Il2CppReferenceArray<Object> FindObjectsOfType( Il2CppSystem.Type type ) => throw new NotImplementedException();
       public static Il2CppArrayBase<T> FindObjectsOfType<T>() where T : Object => throw new NotImplementedException();
 #else
@@ -100,7 +107,7 @@ namespace UnityEngine
 
       private static void CheckNullArgument( object arg, string message ) => throw new NotImplementedException();
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public static Object FindObjectOfType( Il2CppSystem.Type type ) => throw new NotImplementedException();
 #else
       public static Object FindObjectOfType( Type type ) => throw new NotImplementedException();

@@ -12,7 +12,7 @@ namespace UnityEngine
 {
    public class GUI
    {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public sealed class WindowFunction : Il2CppSystem.MulticastDelegate
       {
          public WindowFunction( IntPtr value ) : base( value )

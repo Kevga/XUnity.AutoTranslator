@@ -1,8 +1,14 @@
-﻿#if IL2CPP
+﻿#if IL2CPP || IL2CPPBE2
 
 using System;
+
+#if IL2CPP
 using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
 
 namespace UnityEngine
 {

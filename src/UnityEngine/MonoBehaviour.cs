@@ -22,7 +22,7 @@ namespace UnityEngine
 
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public Coroutine StartCoroutine( Il2CppSystem.Collections.IEnumerator routine ) => throw new NotImplementedException();
 #else
       public Coroutine StartCoroutine( IEnumerator routine ) => throw new NotImplementedException();

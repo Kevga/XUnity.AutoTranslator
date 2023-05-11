@@ -24,7 +24,7 @@ namespace UnityEngine
          set => throw new NotImplementedException();
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public Component GetComponent( Il2CppSystem.Type type ) => throw new NotImplementedException();
 #else
       public Component GetComponent( Type type ) => throw new NotImplementedException();

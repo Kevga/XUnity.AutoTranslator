@@ -52,38 +52,38 @@ namespace UnityEngine
 
       public static string systemCopyBuffer
       {
-   
-   
+
+
          get;
-   
-   
+
+
          set;
       }
 
       internal static bool mouseUsed
       {
-   
-   
+
+
          get;
-   
-   
+
+
          set;
       }
 
       public static bool hasModalWindow
       {
-   
-   
+
+
          get;
       }
 
       internal static bool textFieldInput
       {
-   
-   
+
+
          get;
-   
-   
+
+
          set;
       }
 
@@ -112,7 +112,7 @@ namespace UnityEngine
          return Internal_GetNextControlID2( contents.hash, focus, position );
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public static object GetStateObject( Il2CppSystem.Type t, int controlID ) => throw new NotImplementedException();
 #else
       public static object GetStateObject( Type t, int controlID ) => throw new NotImplementedException();

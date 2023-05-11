@@ -23,7 +23,9 @@ namespace XUnity.AutoTranslator.Plugin.Core
 
          try
          {
+#if !IL2CPPBE2
             TestReflectionEmit();
+#endif
 
             SupportsReflectionEmit = true;
          }
@@ -33,11 +35,13 @@ namespace XUnity.AutoTranslator.Plugin.Core
          }
       }
 
+#if !IL2CPPBE2
       private static void TestReflectionEmit()
       {
          MethodToken t1 = default( MethodToken );
          MethodToken t2 = default( MethodToken );
          var ok = t1 == t2;
       }
+#endif
    }
 }

@@ -45,14 +45,14 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks.UGUI
 
       static void Postfix( Component __instance )
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          __instance = (Component)Il2CppUtilities.CreateProxyComponentWithDerivedType( __instance.Pointer, UnityTypes.Text.ClrType );
 #endif
 
          _Postfix( __instance );
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       static IntPtr TargetMethodPointer()
       {
          return UnityTypes.Text_Methods.IL2CPP.set_text;
@@ -106,7 +106,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks.UGUI
       {
          if( UnityTypes.Text.IsAssignableFrom( __instance.GetUnityType() ) )
          {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
             __instance = (Component)Il2CppUtilities.CreateProxyComponentWithDerivedType( __instance.Pointer, UnityTypes.Text.ClrType );
 #endif
 
@@ -114,7 +114,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks.UGUI
          }
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       static IntPtr TargetMethodPointer()
       {
          return UnityTypes.Text_Methods.IL2CPP.OnEnable;

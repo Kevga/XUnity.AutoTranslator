@@ -7,6 +7,8 @@ using XUnity.Common.Extensions;
 
 #if IL2CPP
 using UnhollowerBaseLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime;
 #endif
 
 namespace XUnity.AutoTranslator.Plugin.Core.Utilities
@@ -16,7 +18,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Utilities
       public static T[] FindObjectsOfType<T>()
          where T : UnityEngine.Object
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          var il2cppType = Il2CppSystem.Type.internal_from_handle( IL2CPP.il2cpp_class_get_type( Il2CppClassPointerStore<T>.NativeClassPtr ) );
          var objects = UnityEngine.Object.FindObjectsOfType( il2cppType );
 #else

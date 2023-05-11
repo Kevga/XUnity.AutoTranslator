@@ -8,6 +8,10 @@ using XUnity.Common.Harmony;
 using XUnity.Common.MonoMod;
 using XUnity.Common.Utilities;
 
+#if IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes;
+#endif
+
 namespace XUnity.AutoTranslator.Plugin.Core.Hooks
 {
    internal static class FairyGUIHooks
@@ -33,11 +37,13 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks
 
 #if MANAGED
       static void Postfix( object __instance )
-#else
+#elif IL2CPP
       static void Postfix( UnhollowerBaseLib.Il2CppObjectBase __instance )
+#elif IL2CPPBE2
+      static void Postfix( Il2CppObjectBase __instance )
 #endif
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          __instance = Il2CppUtilities.CreateProxyComponentWithDerivedType( __instance.Pointer, UnityTypes.TextField.ClrType );
 #endif
 
@@ -77,11 +83,13 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks
 
 #if MANAGED
       static void Postfix( object __instance )
-#else
+#elif IL2CPP
       static void Postfix( UnhollowerBaseLib.Il2CppObjectBase __instance )
+#elif IL2CPPBE2
+      static void Postfix( Il2CppObjectBase __instance )
 #endif
       {
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
          __instance = Il2CppUtilities.CreateProxyComponentWithDerivedType( __instance.Pointer, UnityTypes.TextField.ClrType );
 #endif
 

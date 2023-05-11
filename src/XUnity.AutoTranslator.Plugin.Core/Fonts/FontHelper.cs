@@ -7,6 +7,12 @@ using XUnity.Common.Constants;
 using XUnity.Common.Logging;
 using XUnity.Common.Utilities;
 
+#if IL2CPP
+using UnhollowerBaseLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
+
 namespace XUnity.AutoTranslator.Plugin.Core.Fonts
 {
    internal static class FontHelper
@@ -48,7 +54,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Fonts
 #if MANAGED
                   var assets = (UnityEngine.Object[])UnityTypes.AssetBundle_Methods.LoadAllAssets.Invoke( bundle, new object[] { UnityTypes.TMP_FontAsset.UnityType } );
 #else
-                  var assets = (UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object>)UnityTypes.AssetBundle_Methods.LoadAllAssets.Invoke( bundle, new object[] { UnityTypes.TMP_FontAsset.UnityType } );
+                  var assets = (Il2CppReferenceArray<UnityEngine.Object>)UnityTypes.AssetBundle_Methods.LoadAllAssets.Invoke( bundle, new object[] { UnityTypes.TMP_FontAsset.UnityType } );
 #endif
                   font = assets?.FirstOrDefault();
                }
@@ -57,7 +63,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Fonts
 #if MANAGED
                   var assets = (UnityEngine.Object[])UnityTypes.AssetBundle_Methods.LoadAll.Invoke( bundle, new object[] { UnityTypes.TMP_FontAsset.UnityType } );
 #else
-                  var assets = (UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object>)UnityTypes.AssetBundle_Methods.LoadAll.Invoke( bundle, new object[] { UnityTypes.TMP_FontAsset.UnityType } );
+                  var assets = (Il2CppReferenceArray<UnityEngine.Object>)UnityTypes.AssetBundle_Methods.LoadAll.Invoke( bundle, new object[] { UnityTypes.TMP_FontAsset.UnityType } );
 #endif
                   font = assets?.FirstOrDefault();
                }
@@ -91,7 +97,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Fonts
          return font;
       }
 
-#if IL2CPP
+#if IL2CPP || IL2CPPBE2
       public static UnityEngine.Object GetTextMeshProFontByCustomProxies( string assetBundle )
       {
          UnityEngine.Object font = null;
@@ -100,7 +106,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Fonts
          if( File.Exists( overrideFontPath ) )
          {
             XuaLogger.AutoTranslator.Info( "Attempting to load TextMesh Pro font from asset bundle." );
-            
+
             var bundle = AssetBundleProxy.LoadFromFile( overrideFontPath );
 
             if( bundle == null )
