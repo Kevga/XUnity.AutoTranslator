@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>XUnity.AutoTranslator.Plugin.BepInEx_IL2CPP_BE2</AssemblyName>
+    <Description></Description>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.samboy.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>XUnity.AutoTranslator.Plugin.BepInEx_IL2CPP_BE2</RootNamespace>
+    <EnableNETAnalyzers>False</EnableNETAnalyzers>
+    <AnalysisLevel>6.0</AnalysisLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UnityEngine\UnityEngine.csproj" />
+    <ProjectReference Include="..\XUnity.AutoTranslator.Plugin.Core\XUnity.AutoTranslator.Plugin.Core.csproj" />
+    <ProjectReference Include="..\XUnity.Common\XUnity.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BepInEx.Core">
+      <HintPath>..\..\libs\BepInEx IL2CPP 6.0.0-be.668\BepInEx.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="BepInEx.Unity.IL2CPP">
+      <HintPath>..\..\libs\BepInEx IL2CPP 6.0.0-be.668\BepInEx.Unity.IL2CPP.dll</HintPath>
+    </Reference>
+    <Reference Include="ExIni">
+      <HintPath>..\..\libs\ExIni.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

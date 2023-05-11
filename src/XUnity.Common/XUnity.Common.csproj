@@ -10,7 +10,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DevelopmentDependency>True</DevelopmentDependency>
-    <TargetFrameworks>net35;net472</TargetFrameworks>
+    <TargetFrameworks>net35;net472;net6.0</TargetFrameworks>
     <Version>1.0.3</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -34,6 +34,10 @@
    <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
       <DefineConstants>IL2CPP</DefineConstants>
    </PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+		<DefineConstants>IL2CPPBE2</DefineConstants>
+	</PropertyGroup>
    
    <ItemGroup Condition="'$(TargetFramework)'=='net472'">
       <Reference Include="UnhollowerBaseLib">
@@ -46,6 +50,12 @@
          <HintPath>..\..\libs\Proxies\Il2Cppmscorlib.dll</HintPath>
       </Reference>
    </ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+		<Reference Include="Il2Cppmscorlib">
+			<HintPath>..\..\libs\Proxies\Il2Cppmscorlib.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 
   <ItemGroup>
     <Reference Include="Mono.Cecil">
