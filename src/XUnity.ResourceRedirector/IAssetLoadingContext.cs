@@ -1,4 +1,9 @@
 ﻿using UnityEngine;
+#if IL2CPP
+using UnhollowerBaseLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
 
 namespace XUnity.ResourceRedirector
 {
@@ -55,7 +60,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
       UnityEngine.Object[] Assets { get; set; }
 #else
-      UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> Assets { get; set; }
+      Il2CppReferenceArray<UnityEngine.Object> Assets { get; set; }
 #endif
 
       /// <summary>

@@ -6,6 +6,12 @@ using UnityEngine;
 using XUnity.Common.Extensions;
 using XUnity.Common.Utilities;
 
+#if IL2CPP
+using UnhollowerBaseLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
+
 namespace XUnity.ResourceRedirector
 {
    /// <summary>
@@ -20,7 +26,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
       internal AssetLoadedContext( AssetLoadedParameters parameters, AssetBundle bundle, UnityEngine.Object[] assets )
 #else
-      internal AssetLoadedContext( AssetLoadedParameters parameters, AssetBundle bundle, UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> assets )
+      internal AssetLoadedContext( AssetLoadedParameters parameters, AssetBundle bundle, Il2CppReferenceArray<UnityEngine.Object> assets )
 #endif
       {
          Parameters = parameters;
@@ -169,7 +175,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
       public UnityEngine.Object[] Assets { get => _backingField.Array; set => _backingField.Array = value; }
 #else
-      public UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> Assets { get => _backingField.Array; set => _backingField.Array = value; }
+      public Il2CppReferenceArray<UnityEngine.Object> Assets { get => _backingField.Array; set => _backingField.Array = value; }
 #endif
 
 

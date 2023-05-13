@@ -12,6 +12,12 @@ using XUnity.Common.Logging;
 using XUnity.Common.Utilities;
 using XUnity.ResourceRedirector.Hooks;
 
+#if IL2CPP
+using UnhollowerBaseLib;
+#elif IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
+
 namespace XUnity.ResourceRedirector
 {
    /// <summary>
@@ -799,7 +805,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
          UnityEngine.Object[] arr = null;
 #else
-         UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> arr = null;
+         Il2CppReferenceArray<UnityEngine.Object> arr = null;
 #endif
 
 
@@ -825,7 +831,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
       internal static AssetLoadingContext Hook_AssetLoading_Prefix( AssetLoadingParameters parameters, AssetBundle bundle, ref UnityEngine.Object[] assets )
 #else
-      internal static AssetLoadingContext Hook_AssetLoading_Prefix( AssetLoadingParameters parameters, AssetBundle bundle, ref UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> assets )
+      internal static AssetLoadingContext Hook_AssetLoading_Prefix( AssetLoadingParameters parameters, AssetBundle bundle, ref Il2CppReferenceArray<UnityEngine.Object> assets )
 #endif
       {
          var context = new AssetLoadingContext( parameters, bundle );
@@ -966,7 +972,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
          UnityEngine.Object[] arr;
 #else
-         UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> arr;
+         Il2CppReferenceArray<UnityEngine.Object> arr;
 #endif
          if( asset == null )
          {
@@ -997,7 +1003,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
       internal static void Hook_AssetLoaded_Postfix( AssetLoadingParameters parameters, AssetBundle bundle, ref UnityEngine.Object[] assets )
 #else
-      internal static void Hook_AssetLoaded_Postfix( AssetLoadingParameters parameters, AssetBundle bundle, ref UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> assets )
+      internal static void Hook_AssetLoaded_Postfix( AssetLoadingParameters parameters, AssetBundle bundle, ref Il2CppReferenceArray<UnityEngine.Object> assets )
 #endif
       {
          FireAssetLoadedEvent( parameters.ToAssetLoadedParameters(), bundle, ref assets );
@@ -1008,7 +1014,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
          UnityEngine.Object[] arr;
 #else
-         UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> arr;
+         Il2CppReferenceArray<UnityEngine.Object> arr;
 #endif
          if( asset == null )
          {
@@ -1039,7 +1045,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
       internal static void Hook_ResourceLoaded_Postfix( ResourceLoadedParameters parameters, ref UnityEngine.Object[] assets )
 #else
-      internal static void Hook_ResourceLoaded_Postfix( ResourceLoadedParameters parameters, ref UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> assets )
+      internal static void Hook_ResourceLoaded_Postfix( ResourceLoadedParameters parameters, ref Il2CppReferenceArray<UnityEngine.Object> assets )
 #endif
       {
          FireResourceLoadedEvent( parameters, ref assets );
@@ -1048,7 +1054,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
       internal static void FireAssetLoadedEvent( AssetLoadedParameters parameters, AssetBundle assetBundle, ref UnityEngine.Object[] assets )
 #else
-      internal static void FireAssetLoadedEvent( AssetLoadedParameters parameters, AssetBundle assetBundle, ref UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> assets )
+      internal static void FireAssetLoadedEvent( AssetLoadedParameters parameters, AssetBundle assetBundle, ref Il2CppReferenceArray<UnityEngine.Object> assets )
 #endif
       {
          var originalAssets = assets?.ToArray();
@@ -1180,7 +1186,7 @@ namespace XUnity.ResourceRedirector
 #if MANAGED
       internal static void FireResourceLoadedEvent( ResourceLoadedParameters parameters, ref UnityEngine.Object[] assets )
 #else
-      internal static void FireResourceLoadedEvent( ResourceLoadedParameters parameters, ref UnhollowerBaseLib.Il2CppReferenceArray<UnityEngine.Object> assets )
+      internal static void FireResourceLoadedEvent( ResourceLoadedParameters parameters, ref Il2CppReferenceArray<UnityEngine.Object> assets )
 #endif
       {
          var originalAssets = assets?.ToArray();
