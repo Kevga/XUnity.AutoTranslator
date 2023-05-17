@@ -1,0 +1,136 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>XUnity.ResourceRedirector.BepInEx_IL2CPP_BE2</RootNamespace>
+        <Version>2.0.0</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\XUnity.Common\XUnity.Common.csproj" />
+        <ProjectReference Include="..\XUnity.ResourceRedirector\XUnity.ResourceRedirector.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="BepInEx.Core">
+            <HintPath>..\..\libs\BepInEx IL2CPP 6.0.0-be.668\BepInEx.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="BepInEx.Unity.IL2CPP">
+            <HintPath>..\..\libs\BepInEx IL2CPP 6.0.0-be.668\BepInEx.Unity.IL2CPP.dll</HintPath>
+        </Reference>
+        <Reference Include="ExIni">
+            <HintPath>..\..\libs\ExIni.dll</HintPath>
+        </Reference>
+
+        <Reference Include="UnityEngine.AIModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AndroidJNIModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AndroidJNIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AnimationModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AnimationModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AssetBundleModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AssetBundleModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AudioModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.DirectorModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.DirectorModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.GameCenterModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.GameCenterModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.GridModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.GridModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ImageConversionModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ImageConversionModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.IMGUIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.InputLegacyModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.InputModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.JSONSerializeModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.JSONSerializeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ParticleSystemModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ParticleSystemModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.Physics2DModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.Physics2DModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.PhysicsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ScreenCaptureModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ScreenCaptureModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SharedInternalsModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SharedInternalsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SpriteShapeModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SpriteShapeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SubsystemsModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SubsystemsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TerrainModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TerrainModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TextRenderingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TilemapModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TilemapModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UI.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIElementsNativeModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UIElementsNativeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityAnalyticsModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityWebRequestModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VFXModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VFXModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VideoModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VideoModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VRModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VRModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.XRModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.XRModule.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+            <Output TaskParameter="Assemblies" ItemName="Targets" />
+        </GetAssemblyIdentity>
+        <ItemGroup>
+            <VersionNumber Include="$([System.Text.RegularExpressions.Regex]::Replace(&quot;%(Targets.Version)&quot;, &quot;^(.+?)(\.0+)$&quot;, &quot;$1&quot;))" />
+        </ItemGroup>
+        <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;   XCOPY /Y /I &quot;$(TargetDir)XUnity.Common.dll&quot; &quot;$(SolutionDir)dist\RR-BepInEx-IL2CPP\BepInEx\core\&quot;&#xD;&#xA;   XCOPY /Y /I &quot;$(TargetDir)XUnity.ResourceRedirector.dll&quot; &quot;$(SolutionDir)dist\RR-BepInEx-IL2CPP\BepInEx\plugins\XUnity.ResourceRedirector\&quot;&#xD;&#xA;   XCOPY /Y /I &quot;$(TargetDir)$(TargetName)$(TargetExt)&quot; &quot;$(SolutionDir)dist\RR-BepInEx-IL2CPP\BepInEx\plugins\XUnity.ResourceRedirector\&quot;&#xD;&#xA;   COPY /Y &quot;$(SolutionDir)README.md&quot; &quot;$(SolutionDir)dist\RR-BepInEx-IL2CPP\BepInEx\plugins\README (AutoTranslator).md&quot;&#xD;&#xA;   &quot;$(SolutionDir)tools\xzip.exe&quot; &quot;$(SolutionDir)dist\RR-BepInEx-IL2CPP&quot; &quot;$(SolutionDir)dist\XUnity.ResourceRedirector-BepInEx-IL2CPP-@(VersionNumber).zip&quot;&#xD;&#xA;)" />
+    </Target>
+
+</Project>
