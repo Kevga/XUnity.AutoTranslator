@@ -943,7 +943,7 @@ namespace XUnity.ResourceRedirector
             else if( context.ResolveType == AsyncAssetLoadingResolve.ThroughAssets )
             {
                // simply create a dummy request object
-               request = new AssetBundleRequest(); // is this even legal?
+               //request = new AssetBundleRequest(); // is this even legal?
                if( !context.SkipOriginalCall )
                {
                   XuaLogger.ResourceRedirector.Warn( "Resolving sync over async asset load, but 'SkipOriginalCall' was not set to true. Forcing it to true." );

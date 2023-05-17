@@ -11,6 +11,10 @@ using XUnity.AutoTranslator.Plugin.Core.Web;
 using XUnity.Common.Constants;
 using XUnity.Common.Harmony;
 
+#if IL2CPPBE2
+using UnityEngine.Networking;
+#endif
+
 namespace XUnity.AutoTranslator.Plugin.Core.Endpoints.Www
 {
    /// <summary>
@@ -66,6 +70,37 @@ namespace XUnity.AutoTranslator.Plugin.Core.Endpoints.Www
       /// <param name="context"></param>
       public abstract void OnExtractTranslation( IWwwTranslationExtractionContext context );
 
+#if IL2CPPBE2
+      /// <summary>
+      /// Creates a UnityWebRequest object used to send a web request.
+      ///
+      /// Consider using this instead of default UnityWebRequest constructor, as that
+      /// may cause issues with different unity versions.
+      /// </summary>
+      /// <param name="address"></param>
+      /// <param name="data"></param>
+      /// <param name="headers"></param>
+      /// <returns></returns>
+      protected UnityWebRequest CreateWww( string address, byte[] data, Dictionary<string, string> headers )
+      {
+         var www = new UnityWebRequest( address, "POST" );
+
+         if( headers != null )
+         {
+            foreach( var kvp in headers )
+            {
+               www.SetRequestHeader( kvp.Key, kvp.Value );
+            }
+         }
+
+         if( data != null )
+         {
+            www.uploadHandler = new UploadHandlerRaw( data );
+         }
+
+         return www;
+      }
+#else
       /// <summary>
       /// Creates a WWW object used to send a web request.
       ///
@@ -80,6 +115,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Endpoints.Www
       {
          return new WWW( address, data, headers );
       }
+#endif
 
       /// <summary>
       /// Attempt to translated the provided untranslated text. Will be used in a "coroutine",
@@ -93,7 +129,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Endpoints.Www
          var setup = OnBeforeTranslate( wwwContext );
          if( setup != null )
          {
-            while( setup.MoveNext() ) yield return setup.Current; 
+            while( setup.MoveNext() ) yield return setup.Current;
          }
 
          // prepare request
@@ -108,6 +144,18 @@ namespace XUnity.AutoTranslator.Plugin.Core.Endpoints.Www
          // execute request
          var www = CreateWww( request.Address, data != null ? Encoding.UTF8.GetBytes( data ) : null, headers );
 
+#if IL2CPPBE2
+         // wait for completion
+         yield return www.SendWebRequest();
+
+         // extract error
+         string error = www.error;
+         if( error != null ) wwwContext.Fail( "Error occurred while retrieving translation. " + error );
+
+         // extract text
+         var text = www.downloadHandler.text;
+         if( text == null ) wwwContext.Fail( "Error occurred while extracting text from response." );
+#else
          // wait for completion
          yield return www;
 
@@ -117,7 +165,8 @@ namespace XUnity.AutoTranslator.Plugin.Core.Endpoints.Www
 
          // extract text
          var text = www.text;
-         if( text == null ) wwwContext.Fail( "Error occurred while extracting text from response." ); 
+         if( text == null ) wwwContext.Fail( "Error occurred while extracting text from response." );
+#endif
 
          wwwContext.ResponseData = text;
 

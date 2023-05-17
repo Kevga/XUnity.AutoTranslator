@@ -113,7 +113,11 @@ namespace XUnity.AutoTranslator.Plugin.Core.UI
 
       public static GUIStyle CopyWithPropertiesUnsafe( GUIStyle other, Action<GUIStyle> setProperties )
       {
+#if IL2CPPBE2
+         var style = new GUIStyle( other.m_Ptr );
+#else
          var style = new GUIStyle( other );
+#endif
          setProperties( style );
          return style;
       }

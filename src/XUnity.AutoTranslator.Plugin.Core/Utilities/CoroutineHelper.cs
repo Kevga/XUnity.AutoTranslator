@@ -23,6 +23,26 @@ namespace XUnity.AutoTranslator.Plugin.Core.Utilities
          return new WaitForSeconds( seconds );
       }
 
+#if IL2CPPBE2
+      /// <summary>
+      /// WARNING: Pubternal API (internal). Do not use. May change during any update.
+      /// </summary>
+      /// <param name="delay"></param>
+      /// <returns></returns>
+      public static CustomYieldInstruction CreateWaitForSecondsRealtime( float delay )
+      {
+         if( UnityFeatures.SupportsWaitForSecondsRealtime )
+         {
+            return GetWaitForSecondsRealtimeInternal( delay );
+         }
+         return null;
+      }
+
+      private static CustomYieldInstruction GetWaitForSecondsRealtimeInternal( float delay )
+      {
+         return new WaitForSecondsRealtime( delay );
+      }
+#else
       /// <summary>
       /// WARNING: Pubternal API (internal). Do not use. May change during any update.
       /// </summary>
@@ -35,6 +55,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Utilities
          {
             return GetWaitForSecondsRealtimeInternal( delay );
          }
+
          return null;
       }
 
@@ -42,6 +63,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Utilities
       {
          return new WaitForSecondsRealtime( delay );
       }
+#endif
 
       /// <summary>
       /// WARNING: Pubternal API (internal). Do not use. May change during any update.
@@ -56,7 +78,6 @@ namespace XUnity.AutoTranslator.Plugin.Core.Utilities
 #else
          return PluginLoader.MonoBehaviour.StartCoroutine( coroutine );
 #endif
-
       }
 
       /// <summary>
