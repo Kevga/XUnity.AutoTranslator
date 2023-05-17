@@ -5,7 +5,10 @@
    </PropertyGroup>
 
    <ItemGroup>
-      <ProjectReference Include="..\..\UnityEngine\UnityEngine.csproj" />
+      <Reference Include="UnityEngine">
+         <HintPath>..\..\..\libs\UnityEngine\mono\UnityEngine.dll</HintPath>
+      </Reference>
+
       <ProjectReference Include="..\..\XUnity.AutoTranslator.Plugin.Core\XUnity.AutoTranslator.Plugin.Core.csproj" />
    </ItemGroup>
 

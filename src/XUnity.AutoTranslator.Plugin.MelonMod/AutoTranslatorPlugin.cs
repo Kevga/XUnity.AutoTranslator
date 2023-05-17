@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Text;
 using ExIni;
 using MelonLoader;
-using UnityEngine;
 using XUnity.AutoTranslator.Plugin.Core;
 using XUnity.AutoTranslator.Plugin.Core.Configuration;
 using XUnity.AutoTranslator.Plugin.Core.Constants;

@@ -9,7 +9,6 @@ using BepInEx.IL2CPP;
 using BepInEx.Logging;
 using ExIni;
 using UnhollowerRuntimeLib;
-using UnityEngine;
 using XUnity.AutoTranslator.Plugin.Core;
 using XUnity.AutoTranslator.Plugin.Core.Configuration;
 using XUnity.AutoTranslator.Plugin.Core.Constants;

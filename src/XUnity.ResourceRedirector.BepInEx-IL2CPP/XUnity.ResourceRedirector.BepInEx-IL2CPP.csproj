@@ -7,12 +7,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\UnityEngine\UnityEngine.csproj" />
 		<ProjectReference Include="..\XUnity.Common\XUnity.Common.csproj" />
 		<ProjectReference Include="..\XUnity.ResourceRedirector\XUnity.ResourceRedirector.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<Reference Include="UnityEngine">
+			<HintPath>..\..\libs\UnityEngine\unhollower\UnityEngine.dll</HintPath>
+		</Reference>
 		<Reference Include="BepInEx.Core">
 			<HintPath>..\..\libs\BepInEx IL2CPP 6.0.0.291\BepInEx.Core.dll</HintPath>
 		</Reference>

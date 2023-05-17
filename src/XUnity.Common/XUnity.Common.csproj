@@ -1,57 +1,168 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <Title>XUnity Common</Title>
-    <Description>Common dependencies shared between XUnity Auto Translator and Resource Redirector.</Description>
-    <Authors>gravydevsupreme</Authors>
-    <PackageTags>unity;xunity</PackageTags>
-    <PackageReleaseNotes>https://github.com/bbepis/XUnity.AutoTranslator/blob/master/CHANGELOG.md</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/bbepis/XUnity.AutoTranslator</PackageProjectUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <DevelopmentDependency>True</DevelopmentDependency>
-    <TargetFrameworks>net35;net472;net6.0</TargetFrameworks>
-    <Version>1.0.3</Version>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Title>XUnity Common</Title>
+        <Description>Common dependencies shared between XUnity Auto Translator and Resource Redirector.</Description>
+        <Authors>gravydevsupreme</Authors>
+        <PackageTags>unity;xunity</PackageTags>
+        <PackageReleaseNotes>https://github.com/bbepis/XUnity.AutoTranslator/blob/master/CHANGELOG.md</PackageReleaseNotes>
+        <PackageProjectUrl>https://github.com/bbepis/XUnity.AutoTranslator</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DevelopmentDependency>True</DevelopmentDependency>
+        <TargetFrameworks>net35;net472;net6.0</TargetFrameworks>
+        <Version>1.0.3</Version>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\UnityEngine\UnityEngine.csproj" />
-  </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)'=='net35'">
+        <Reference Include="UnityEngine">
+            <HintPath>..\..\libs\UnityEngine\mono\UnityEngine.dll</HintPath>
+        </Reference>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Update="*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="tools" />
-  </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)'=='net472'">
+        <Reference Include="UnityEngine">
+            <HintPath>..\..\libs\UnityEngine\unhollower\UnityEngine.dll</HintPath>
+        </Reference>
+    </ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\net35\XUnity.Common.xml</DocumentationFile>
-  </PropertyGroup>
 
-   <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
-      <DefineConstants>MANAGED</DefineConstants>
-   </PropertyGroup>
+    <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+        <Reference Include="UnityEngine.AIModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AndroidJNIModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AndroidJNIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AnimationModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AnimationModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AssetBundleModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AssetBundleModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AudioModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.DirectorModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.DirectorModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.GameCenterModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.GameCenterModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.GridModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.GridModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ImageConversionModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ImageConversionModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.IMGUIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.InputLegacyModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.InputModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.JSONSerializeModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.JSONSerializeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ParticleSystemModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ParticleSystemModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.Physics2DModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.Physics2DModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.PhysicsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ScreenCaptureModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ScreenCaptureModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SharedInternalsModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SharedInternalsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SpriteShapeModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SpriteShapeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.SubsystemsModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SubsystemsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TerrainModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TerrainModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TextRenderingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TilemapModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TilemapModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UI.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIElementsNativeModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UIElementsNativeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityAnalyticsModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityWebRequestModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VFXModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VFXModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VideoModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VideoModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.VRModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VRModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.XRModule">
+            <HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.XRModule.dll</HintPath>
+        </Reference>
+    </ItemGroup>
 
-   <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
-      <DefineConstants>IL2CPP</DefineConstants>
-   </PropertyGroup>
+    <ItemGroup>
+        <None Update="*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="tools"/>
+    </ItemGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
-		<DefineConstants>IL2CPPBE2</DefineConstants>
-	</PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DocumentationFile>bin\Release\net35\XUnity.Common.xml</DocumentationFile>
+    </PropertyGroup>
 
-   <ItemGroup Condition="'$(TargetFramework)'=='net472'">
-      <Reference Include="UnhollowerBaseLib">
-         <HintPath>..\..\libs\Unhollower\UnhollowerBaseLib.dll</HintPath>
-      </Reference>
-      <Reference Include="UnhollowerRuntimeLib">
-         <HintPath>..\..\libs\Unhollower\UnhollowerRuntimeLib.dll</HintPath>
-      </Reference>
-      <Reference Include="Il2Cppmscorlib">
-         <HintPath>..\..\libs\Proxies\Il2Cppmscorlib.dll</HintPath>
-      </Reference>
-   </ItemGroup>
+    <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
+        <DefineConstants>MANAGED</DefineConstants>
+    </PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
+        <DefineConstants>IL2CPP</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+        <DefineConstants>IL2CPPBE2</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)'=='net472'">
+        <Reference Include="UnhollowerBaseLib">
+            <HintPath>..\..\libs\Unhollower\UnhollowerBaseLib.dll</HintPath>
+        </Reference>
+        <Reference Include="UnhollowerRuntimeLib">
+            <HintPath>..\..\libs\Unhollower\UnhollowerRuntimeLib.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2Cppmscorlib">
+            <HintPath>..\..\libs\Proxies\Il2Cppmscorlib.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
         <Reference Include="Il2Cppmscorlib">
             <HintPath>..\..\libs\BE2Proxies\Il2Cppmscorlib.dll</HintPath>
         </Reference>
@@ -67,15 +178,15 @@
         <Reference Include="Il2CppInterop.Runtime">
             <HintPath>..\..\libs\Il2CppInterop\Il2CppInterop.Runtime.dll</HintPath>
         </Reference>
-	</ItemGroup>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\..\libs\MonoMod\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\libs\MonoMod\MonoMod.Utils.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+    <ItemGroup>
+        <Reference Include="Mono.Cecil">
+            <HintPath>..\..\libs\MonoMod\Mono.Cecil.dll</HintPath>
+        </Reference>
+        <Reference Include="MonoMod.Utils">
+            <HintPath>..\..\libs\MonoMod\MonoMod.Utils.dll</HintPath>
+        </Reference>
+    </ItemGroup>
 
 </Project>

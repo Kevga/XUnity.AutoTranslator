@@ -36,7 +36,16 @@
 		<DefineConstants>IL2CPPBE2</DefineConstants>
 	</PropertyGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)'=='net35'">
+		<Reference Include="UnityEngine">
+			<HintPath>..\..\libs\UnityEngine\mono\UnityEngine.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
 	<ItemGroup Condition="'$(TargetFramework)'=='net472'">
+		<Reference Include="UnityEngine">
+			<HintPath>..\..\libs\UnityEngine\unhollower\UnityEngine.dll</HintPath>
+		</Reference>
 		<Reference Include="UnhollowerBaseLib">
 			<HintPath>..\..\libs\Unhollower\UnhollowerBaseLib.dll</HintPath>
 		</Reference>
@@ -70,29 +79,9 @@
 		<PackageReference Include="ILRepack.MSBuild.Task" Version="2.0.13" PrivateAssets="All" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Reference Include="0Harmony">
-			<HintPath>..\..\libs\0Harmony.dll</HintPath>
-		</Reference>
-		<Reference Include="ExIni">
-			<HintPath>..\..\libs\ExIni.dll</HintPath>
-		</Reference>
-		<Reference Include="ICSharpCode.SharpZipLib">
-			<HintPath>..\..\libs\ICSharpCode.SharpZipLib.dll</HintPath>
-		</Reference>
-		<Reference Include="Mono.Cecil">
-			<HintPath>..\..\libs\MonoMod\Mono.Cecil.dll</HintPath>
-		</Reference>
-		<Reference Include="MonoMod.RuntimeDetour">
-			<HintPath>..\..\libs\MonoMod\MonoMod.RuntimeDetour.dll</HintPath>
-		</Reference>
-		<Reference Include="MonoMod.Utils">
-			<HintPath>..\..\libs\MonoMod\MonoMod.Utils.dll</HintPath>
-		</Reference>
-	</ItemGroup>
+
 
 	<ItemGroup>
-		<ProjectReference Include="..\UnityEngine\UnityEngine.csproj" />
 		<ProjectReference Include="..\XUnity.AutoTranslator.Plugin.ExtProtocol\XUnity.AutoTranslator.Plugin.ExtProtocol.csproj" PrivateAssets="All" />
 		<ProjectReference Include="..\XUnity.Common\XUnity.Common.csproj" PrivateAssets="All" />
 		<ProjectReference Include="..\XUnity.ResourceRedirector\XUnity.ResourceRedirector.csproj" PrivateAssets="All" />
@@ -113,17 +102,230 @@
 		</EmbeddedResource>
 	</ItemGroup>
 
-	<!-- No idea why I need one for each -->
-	<Target Name="ILRepackNET60" AfterTargets="Build" Condition="'$(TargetFramework)'=='net6.0'">
-		<PropertyGroup>
-			<WorkingDirectory>$(MSBuildThisFileDirectory)bin\$(Configuration)\$(TargetFramework)</WorkingDirectory>
-		</PropertyGroup>
-		<ItemGroup>
-			<InputAssemblies Include="ICSharpCode.SharpZipLib.dll" />
-		</ItemGroup>
-		<Message Text="MERGING: @(InputAssemblies)-&gt;'%(Filename)') into $(OutputAssembly)" Importance="High" />
-		<ILRepack OutputType="$(OutputType)" MainAssembly="$(AssemblyName).dll" OutputAssembly="$(AssemblyName).dll" InputAssemblies="@(InputAssemblies)" InternalizeExcludeAssemblies="@(InternalizeExcludeAssemblies)" WorkingDirectory="$(WorkingDirectory)" />
-	</Target>
+	<ItemGroup>
+		<Reference Include="Harmony">
+			<HintPath>..\..\libs\0Harmony_bepinex.dll</HintPath>
+		</Reference>
+		<Reference Include="ICSharpCode">
+			<HintPath>..\..\libs\ICSharpCode.SharpZipLib.dll</HintPath>
+		</Reference>
+		<Reference Include="ExIni">
+			<HintPath>..\..\libs\ExIni.dll</HintPath>
+		</Reference>
+		<Reference Include="Mono.Cecil">
+			<HintPath>..\..\libs\MonoMod\Mono.Cecil.dll</HintPath>
+		</Reference>
+		<Reference Include="MonoMod.RuntimeDetour">
+			<HintPath>..\..\libs\MonoMod\MonoMod.RuntimeDetour.dll</HintPath>
+		</Reference>
+		<Reference Include="MonoMod.Utils">
+			<HintPath>..\..\libs\MonoMod\MonoMod.Utils.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+		<Reference Include="UnityEngine">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AccessibilityModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AccessibilityModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AIModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AndroidJNIModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AndroidJNIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AnimationModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AnimationModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AssetBundleModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AssetBundleModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AudioModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.AudioModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ClothModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ClothModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ClusterInputModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ClusterInputModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ClusterRendererModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ClusterRendererModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CrashReportingModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.CrashReportingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.DirectorModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.DirectorModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.DSPGraphModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.DSPGraphModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.GameCenterModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.GameCenterModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.GIModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.GIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.GridModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.GridModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.HotReloadModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.HotReloadModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ImageConversionModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ImageConversionModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.IMGUIModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.IMGUIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.InputLegacyModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.InputLegacyModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.InputModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.InputModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.JSONSerializeModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.JSONSerializeModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.LocalizationModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.LocalizationModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ParticleSystemModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ParticleSystemModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.PerformanceReportingModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.PerformanceReportingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.Physics2DModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.Physics2DModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.PhysicsModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.PhysicsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ProfilerModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ProfilerModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ScreenCaptureModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.ScreenCaptureModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SharedInternalsModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SharedInternalsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SpriteMaskModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SpriteMaskModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SpriteShapeModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SpriteShapeModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.StreamingModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.StreamingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SubstanceModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SubstanceModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SubsystemsModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.SubsystemsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TerrainModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TerrainModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TerrainPhysicsModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TextCoreFontEngineModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TextCoreTextEngineModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TextRenderingModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TextRenderingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TilemapModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TilemapModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TLSModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.TLSModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIElementsModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UIElementsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIElementsNativeModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UIElementsNativeModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UmbraModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UmbraModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UNETModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UNETModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityAnalyticsModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityConnectModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityConnectModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityCurlModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityCurlModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityTestProtocolModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestAudioModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityWebRequestModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestTextureModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestWWWModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VehiclesModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VehiclesModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VFXModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VFXModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VideoModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VideoModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VirtualTexturingModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VirtualTexturingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VRModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.VRModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.WindModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.WindModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.XRModule">
+			<HintPath>..\..\libs\UnityEngine\cpp2ilinterop\UnityEngine.XRModule.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 
 	<Target Name="ILRepackNET472" AfterTargets="Build" Condition="'$(TargetFramework)'=='net472'">
 		<PropertyGroup>

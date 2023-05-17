@@ -6,11 +6,13 @@
    </PropertyGroup>
 
    <ItemGroup>
-      <ProjectReference Include="..\UnityEngine\UnityEngine.csproj" />
       <ProjectReference Include="..\XUnity.AutoTranslator.Plugin.Core\XUnity.AutoTranslator.Plugin.Core.csproj" />
    </ItemGroup>
 
    <ItemGroup>
+      <Reference Include="UnityEngine">
+         <HintPath>..\..\libs\UnityEngine\mono\UnityEngine.dll</HintPath>
+      </Reference>
       <Reference Include="ExIni">
          <HintPath>..\..\libs\ExIni.dll</HintPath>
       </Reference>
