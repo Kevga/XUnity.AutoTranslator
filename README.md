@@ -17,7 +17,7 @@
  * [Integrating with Auto Translator](#integrating-with-auto-translator)
  * [Implementing a Translator](#implementing-a-translator)
  * [Implementing a Resource Redirector](#implementing-a-resource-redirector)
- 
+
 ## Introduction
 This is an advanced translator plugin that can be used to translate Unity-based games automatically and also provides the tools required to translate games manually.
 
@@ -77,7 +77,7 @@ The file structure should like like this
 **NOTE:** The `Mono.Cecil.dll` file placed in the ReiPatcher directory is not the same file as is placed in the Managed directory.
 
 ### BepInEx Plugin
-REQUIRES: [BepInEx plugin manager](https://github.com/BepInEx/BepInEx) (follow its installation instructions first!). 
+REQUIRES: [BepInEx plugin manager](https://github.com/BepInEx/BepInEx) (follow its installation instructions first!).
 
  1. Download XUnity.AutoTranslator-BepInEx-{VERSION}.zip from [releases](../../releases).
  2. Extract directly into the game directory, such that the plugin dlls are placed in BepInEx folder.
@@ -171,7 +171,7 @@ The file structure should like like this
  ```
 
 **NOTE:** MonoMod hooks are not supported with this installation method because an outdated version of `Mono.Cecil.dll` is being used with Sybaris.
- 
+
 ## Key Mapping
 The following key inputs are mapped:
  * ALT + 0: Toggle XUnity AutoTranslator UI. (That's a zero, not an O)
@@ -205,7 +205,7 @@ The supported translators are:
  * [DeepLTranslate](https://anonym.to/?https://www.deepl.com/translator), based on the online DeepL translation service. Does not require authentication.
    * No limitations, but unstable. Remarkable quality.
  * [DeepLTranslateLegitimate](https://anonym.to/?https://www.deepl.com/translator), based on the online DeepL translation service. Requires an  API Key.
-   * $4.99 per month and $20 per million characters translated that month. 
+   * $4.99 per month and $20 per million characters translated that month.
    * Free up to 0.5 million characters per month.
    * For now, you must subscribe to DeepL API (for Developers). - DOES NOT WORK WITH DeepL Pro (Starter, Advanced and Ultimate)
  * [PapagoTranslate](https://anonym.to/?https://papago.naver.com/), based on the online Papago translation service. Does not require authentication.
@@ -234,7 +234,7 @@ The supported translators are:
    * Example Response (only body): Hello
    * Known implementations that can be used with CustomTranslate:
      * ezTrans: https://github.com/HelloKS/ezTransWeb
- 
+
 *NOTE: If you use any of the online translators that does not require some form of authentication, that this plugin may break at any time.*
 
 Since 3.0.0, you can also implement your own translators. To do so, follow the instruction [here](#implementing-a-translator).
@@ -319,7 +319,7 @@ FallbackFontTextMeshPro=         ;Adds a fallback font for TextMeshPro in case a
 ResizeUILineSpacingScale=        ;A decimal value that the default line spacing should be scaled by during UI resizing, for example: 0.80. NOTE: Only works for UGUI
 ForceUIResizing=True             ;Indicates whether the UI resize behavior should be applied to all UI components regardless of them being translated.
 IgnoreTextStartingWith=\u180e;   ;Indicates that the plugin should ignore any strings starting with certain characters. This is a list seperated by ';'.
-TextGetterCompatibilityMode=False ;Indicates whether or not to enable "Text Getter Compatibility Mode". Should only be enabled if required by the game. 
+TextGetterCompatibilityMode=False ;Indicates whether or not to enable "Text Getter Compatibility Mode". Should only be enabled if required by the game.
 GameLogTextPaths=                ;Indicates specific paths for game objects that the game uses as "log components", where it continuously appends or prepends text to. Requires expert knowledge to setup. This is a list seperated by ';'.
 RomajiPostProcessing=ReplaceMacronWithCircumflex;RemoveApostrophes;ReplaceHtmlEntities ;Indicates what type of post processing to do on 'translated' romaji texts. This can be important in certain games because the font used does not support various diacritics properly. This is a list seperated by ';'. Possible values: ["RemoveAllDiacritics", "ReplaceMacronWithCircumflex", "RemoveApostrophes", "ReplaceHtmlEntities"]
 TranslationPostProcessing=ReplaceMacronWithCircumflex;ReplaceHtmlEntities ;Indicates what type of post processing to do on translated texts (not romaji). Possible values: ["RemoveAllDiacritics", "ReplaceMacronWithCircumflex", "RemoveApostrophes", "ReplaceWideCharacters", "ReplaceHtmlEntities"]
@@ -352,6 +352,7 @@ EnableTextureScanOnSceneLoad=False ;Indicates whether or not the plugin should s
 EnableSpriteRendererHooking=False ;Indicates whether or not the plugin should attempt to hook SpriteRenderer. This is a seperate option because SpriteRenderer can't actually be hooked properly and the implemented workaround could have a theoretical impact on performance in certain situations
 LoadUnmodifiedTextures=False     ;Indicates whether or not unmodified textures should be loaded. Modifications are determined based on the hash in the file name. Only enable this for debugging purposes as it is likely to cause oddities
 TextureHashGenerationStrategy=FromImageName ;Indicates how the mod identifies pictures through hashes. Can be ["FromImageName", "FromImageData", "FromImageNameAndScene"]
+TextureHashDataPattern=          ;If TextureHashGenerationStrategy is set to "FromImageName", files matching this regex pattern will be using the FromImageData strategy instead.
 DuplicateTextureNames=           ;Indicates specific texture names that are duplicated in the game. List is separated by ';'.
 DetectDuplicateTextureNames=False;Indicates if the plugin should detect duplicate texture names.
 EnableLegacyTextureLoading=False ;Indicates the plugin should use a different strategy to load images, that may be relevant if the game engine is old
@@ -520,22 +521,22 @@ While this plugin offers some level of IL2CPP support, it is by no means complet
  * Many other features are completely unproven
 
 ## Frequently Asked Questions
-> **Q: How do I disable auto translations?**  
+> **Q: How do I disable auto translations?**
 A: Select the empty endpoint when you press ALT+0 or set the configuration parameter `Endpoint=` to empty.
 
-> **Q: How do I disable the plugin entirely?**  
+> **Q: How do I disable the plugin entirely?**
 A: You can do so by deleting the "XUnity.AutoTranslator" directory in the "{GameDirectory}\BepInEx\plugins" directory. Avoid deleting the "XUnity.ResourceRedirector" directory as other plugins may depend on it.
 
-> **Q: The game stops working when this plugin applies translations.**  
+> **Q: The game stops working when this plugin applies translations.**
 A: Try setting the following configuration parameter `TextGetterCompatibilityMode=True`.
 
-> **Q: Can this plugin translate other plugins/mods?**  
+> **Q: Can this plugin translate other plugins/mods?**
 A: Likely yes, see [here](#translating-mods).
 
-> **Q: How do I use CustomTranslate?**  
+> **Q: How do I use CustomTranslate?**
 A: If you have to ask, you probably can't. CustomTranslate is intended for developers of a translation service. They would be able to expose an API that conforms to CustomTranslate's API specification without needing to implement a custom ITranslateEndpoint in this plugin as well.
 
-> **Q: Please provide support for translation service X.**  
+> **Q: Please provide support for translation service X.**
 A: For now, additional support for services that does not require some form of authentication is unlikely. Do note though, that it is possible to implement custom translators independently of this plugin. And it takes remarkably little code to do so.
 
 ## Translating Mods
@@ -774,7 +775,7 @@ The world, however, is not always that simple. Depending on the engine/text fram
 「こう見えて怒っているんですよ？\n ……失礼しますね」
 ```
 
-These text strings are not the same and it would be annoying having to translate the same text multiple times if the final translation is supposed to be the same. 
+These text strings are not the same and it would be annoying having to translate the same text multiple times if the final translation is supposed to be the same.
 
 In fact, only one of these translations are needed. Here's why: (still very much simplified):
  1. When the plugin sees an untranslated text, it will actually make four lookups, not one. These are, in order:
@@ -795,7 +796,7 @@ This means that for the following string `\n 「こう見えて怒っている�
     * Based on the untouched original text and original translation
     * Based on the original text (without leading/trailing whitespace) and original translation (without leading/trailing whitespace)
     * Based on the original text (without leading/trailing whitespace and internal non-repeating whitespace surrounding a newline) and original translation (without leading/trailing whitespace and internal non-repeating whitespace surrounding a newline)
-   
+
 This means that for the following string `\n 「こう見えて怒っているんですよ？\n ……失礼しますね」` the plugin will make the following entries:
 ```
 \n 「こう見えて怒っているんですよ？\n ……失礼しますね」
@@ -863,6 +864,7 @@ EnableTextureScanOnSceneLoad=False
 EnableSpriteRendererHooking=False
 LoadUnmodifiedTextures=False
 TextureHashGenerationStrategy=FromImageName
+TextureHashDataPattern=
 DuplicateTextureNames=
 DetectDuplicateTextureNames=False
 EnableLegacyTextureLoading=False
@@ -1145,7 +1147,7 @@ internal class YandexTranslateEndpoint : HttpEndpoint
             context.DestinationLanguage,
             WwwHelper.EscapeUrl( context.UntranslatedText ),
             _key ) );
-         
+
       request.Headers[ HttpRequestHeader.Accept ] = "*/*";
       request.Headers[ HttpRequestHeader.AcceptCharset ] = "UTF-8";
 
@@ -1993,7 +1995,7 @@ It may also be worth looking at the `GetNormalizedPath()` method instead of the 
  * Absolute path
  * Relative path
  * Include a stray '..' in the middle of the path
- 
+
 Another way to change the result of the asset bundle load operation is to change the value of the `Path`, `Crc` and `Offset` properties in the `Parameters` property. If you do this, you likely will not want to call the Complete method, as you will want the original method to still be called.
 
 #### AssetBundle Asynchrounous Load Methods
@@ -2112,7 +2114,7 @@ It may also be worth looking at the `GetNormalizedPath()` method instead of the 
  * Absolute path
  * Relative path
  * Include a stray '..' in the middle of the path
- 
+
 Another way to change the result of the asset bundle load operation is to change the value of the `Path`, `Crc` and `Offset` properties in the `Parameters` property. If you do this, you likely will not want to call the Complete method, as you will want the original method to still be called.
 
 An important additional way to subscribe to the prefix asset bundle loading operations are through the method `RegisterAsyncAndSyncAssetBundleLoadingHook( int priority, Action<IAssetBundleLoadingContext> action )`. This method will handle both async and sync asset bundle loading operations. The `IAssetLoadingContext` is an interface implemented by both the `AssetBundleLoadingContext` and `AsyncAssetBundleLoadingContext`.
@@ -2153,7 +2155,7 @@ class TextureReplacementPlugin
         if( context.Asset is Texture2D texture2d ) // also acts as a null check
         {
             // TODO: Modify, replace or dump the texture
-                
+
             context.Asset = texture2d; // only need to update the reference if you created a new texture
             context.Complete(
                 skipRemainingPostfixes: true );
@@ -2184,16 +2186,16 @@ class AssetBundleRedirectorPlugin
         if( !File.Exists( context.Parameters.Path ) )
         {
             // the game is trying to load a path that does not exist, lets redirect to our own resources
-		    
+
             // obtain different resource path
             var normalizedPath = context.GetNormalizedPath();
             var modFolderPath = Path.Combine( "mods", normalizedPath );
-		    
+
             // if the path exists, let's load that instead
             if( File.Exists( modFolderPath ) )
             {
                 var bundle = AssetBundle.LoadFromFile( modFolderPath );
-		    
+
                 context.Bundle = bundle;
                 context.Complete(
                     skipRemainingPrefixes: true,
@@ -2207,16 +2209,16 @@ class AssetBundleRedirectorPlugin
         if( !File.Exists( context.Parameters.Path ) )
             {
             // the game is trying to load a path that does not exist, lets redirect to our own resources
-		    
+
             // obtain different resource path
             var normalizedPath = context.GetNormalizedPath();
             var modFolderPath = Path.Combine( "mods", normalizedPath );
-		    
+
             // if the path exists, let's load that instead
             if( File.Exists( modFolderPath ) )
             {
                 var request = AssetBundle.LoadFromFileAsync( modFolderPath );
-		    
+
                 context.Request = request;
                 context.Complete(
                     skipRemainingPrefixes: true,
@@ -2235,7 +2237,7 @@ class AssetBundleRedirectorSyncOverAsyncPlugin
     void Awake()
     {
         ResourceRedirection.EnableSyncOverAsyncAssetLoads();
-	    
+
         ResourceRedirection.RegisterAsyncAndSyncAssetBundleLoadingHook(
             priority: 1000,
             action: AssetBundleLoading );
@@ -2246,16 +2248,16 @@ class AssetBundleRedirectorSyncOverAsyncPlugin
         if( !File.Exists( context.Parameters.Path ) )
         {
             // the game is trying to load a path that does not exist, lets redirect to our own resources
-	    
+
             // obtain different resource path
             var normalizedPath = context.GetNormalizedPath();
             var modFolderPath = Path.Combine( "mods", normalizedPath );
-	    
+
             // if the path exists, let's load that instead
             if( File.Exists( modFolderPath ) )
             {
                 var bundle = AssetBundle.LoadFromFile( modFolderPath );
-	    
+
                 context.Bundle = bundle;
                 context.Complete(
                     skipRemainingPrefixes: true,
@@ -2274,7 +2276,7 @@ class SmartAssetBundleRedirectorSyncOverAsyncPlugin
     void Awake()
     {
         ResourceRedirection.EnableSyncOverAsyncAssetLoads();
-	    
+
         ResourceRedirection.RegisterAsyncAndSyncAssetBundleLoadingHook(
             priority: 1000,
             action: AssetBundleLoading );
@@ -2285,11 +2287,11 @@ class SmartAssetBundleRedirectorSyncOverAsyncPlugin
         if( !File.Exists( context.Parameters.Path ) )
         {
             // the game is trying to load a path that does not exist, lets redirect to our own resources
-	    
+
             // obtain different resource path
             var normalizedPath = context.GetNormalizedPath();
             var modFolderPath = Path.Combine( "mods", normalizedPath );
-	    
+
             // if the path exists, let's load that instead
             if( File.Exists( modFolderPath ) )
             {
@@ -2303,7 +2305,7 @@ class SmartAssetBundleRedirectorSyncOverAsyncPlugin
                     var bundle = AssetBundle.LoadFromFile( modFolderPath );
                     context.Bundle = bundle;
                 }
-	    
+
                 context.Complete(
                     skipRemainingPrefixes: true,
                     skipOriginalCall: true );
@@ -2326,7 +2328,7 @@ public static void EnableEmulateAssetBundles( int hookPriority, string emulation
 {
     RegisterAssetBundleLoadingHook( hookPriority, ctx => HandleAssetBundleEmulation( ctx, SetBundle ) );
     RegisterAsyncAssetBundleLoadingHook( hookPriority, ctx => HandleAssetBundleEmulation( ctx, SetRequest ) );
-		    
+
     // define base callback
     void HandleAssetBundleEmulation<T>( T context, Action<T, string> changeBundle )
         where T : IAssetBundleLoadingContext
@@ -2338,20 +2340,20 @@ public static void EnableEmulateAssetBundles( int hookPriority, string emulation
             if( File.Exists( emulatedPath ) )
             {
                 changeBundle( context, emulatedPath );
-		    
+
                 context.Complete(
                     skipRemainingPrefixes: true,
                     skipOriginalCall: true );
             }
         }
     }
-		    
+
     // synchronous specific code
     void SetBundle( AssetBundleLoadingContext context, string path )
     {
         context.Bundle = AssetBundle.LoadFromFile( path, context.Parameters.Crc, context.Parameters.Offset );
     }
-		    
+
     // asynchronous specific code
     void SetRequest( AsyncAssetBundleLoadingContext context, string path )
     {
@@ -2372,7 +2374,7 @@ public static void EnableRedirectMissingAssetBundlesToEmptyAssetBundle( int hook
 {
     RegisterAssetBundleLoadingHook( hookPriority, ctx => HandleMissingBundle( ctx, SetBundle ) );
     RegisterAsyncAssetBundleLoadingHook( hookPriority, ctx => HandleMissingBundle( ctx, SetRequest ) );
-	    
+
     // define base callback
     void HandleMissingBundle<TContext>( TContext context, Action<TContext, byte[]> changeBundle )
         where TContext : IAssetBundleLoadingContext
@@ -2382,24 +2384,24 @@ public static void EnableRedirectMissingAssetBundlesToEmptyAssetBundle( int hook
         {
             var buffer = Properties.Resources.empty;
             CabHelper.RandomizeCab( buffer );
-	    
+
             changeBundle( context, buffer );
-	    
+
             context.Complete(
                 skipRemainingPrefixes: true,
                 skipOriginalCall: true );
-	    
+
             XuaLogger.ResourceRedirector.Warn( "Tried to load non-existing asset bundle: " + context.Parameters.Path );
         }
     }
-	    
+
     // synchronous specific code
     void SetBundle( AssetBundleLoadingContext context, byte[] assetBundleData )
     {
         var bundle = AssetBundle.LoadFromMemory( assetBundleData );
         context.Bundle = bundle;
     }
-	    
+
     // asynchronous specific code
     void SetRequest( AsyncAssetBundleLoadingContext context, byte[] assetBundleData )
     {
@@ -2494,7 +2496,7 @@ internal class TextAssetLoadedHandler : AssetLoadedHandlerBaseV2<TextAsset>
             {
                 XuaLogger.AutoTranslator.Warn( "Found more than one resource file in the same path: " + calculatedModificationPath );
             }
-		    
+
             file = files.FirstOrDefault();
         }
 
@@ -2504,11 +2506,11 @@ internal class TextAssetLoadedHandler : AssetLoadedHandlerBaseV2<TextAsset>
             {
                 var data = stream.ReadFully( (int)stream.Length );
                 var text = Encoding.UTF8.GetString( data );
-		    
+
                 var ext = asset.GetOrCreateExtensionData<TextAssetExtensionData>();
                 ext.Data = data;
                 ext.Text = text;
-		    
+
                 return true;
             }
         }
@@ -2614,4 +2616,4 @@ Note that this implementation uses a `SimpleTextTranslationCache` to lookup tran
  * It respects the `RedirectedResourceDetectionStrategy` configuration. If this is not respected the plugin may double translate certain texts.
  * When loading text translation files, it supports the same text format that is otherwise used by the plugin.
 
-Once you have implemented one of these classes, you just need to instantiate it and it will do it's magic. 
+Once you have implemented one of these classes, you just need to instantiate it and it will do it's magic.

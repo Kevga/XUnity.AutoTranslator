@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using XUnity.AutoTranslator.Plugin.Core.Configuration;
 using XUnity.AutoTranslator.Plugin.Core.Constants;
 using XUnity.AutoTranslator.Plugin.Core.Extensions;
 using XUnity.AutoTranslator.Plugin.Core.Utilities;
 using XUnity.AutoTranslator.Plugin.Utilities;
+using XUnity.Common.Extensions;
 using XUnity.Common.Logging;
 using XUnity.Common.Utilities;
 
@@ -17,6 +19,7 @@ namespace XUnity.AutoTranslator.Plugin.Core
    {
       private static Dictionary<string, string> NameToHash = new Dictionary<string, string>();
       private static readonly Encoding UTF8 = new UTF8Encoding( false );
+      private static Regex _hashByDataPattern;
 
       private string _key;
       private byte[] _originalData;
@@ -170,52 +173,80 @@ namespace XUnity.AutoTranslator.Plugin.Core
 
       private void SetupHashAndData( Texture2D texture )
       {
-         if( _key == null )
+         if( _key != null ) return;
+
+         if( Settings.TextureHashGenerationStrategy == TextureHashGenerationStrategy.FromImageData )
          {
-            if( Settings.TextureHashGenerationStrategy == TextureHashGenerationStrategy.FromImageData )
+            GenerateHashFromImageData( texture );
+         }
+         else if( Settings.TextureHashGenerationStrategy == TextureHashGenerationStrategy.FromImageName )
+         {
+            var name = texture.GetTextureName( null ); // name may be duplicate, WILL be duplicate!
+            if( name == null ) return;
+
+            if( _hashByDataPattern != null && _hashByDataPattern.IsMatch( name ) )
             {
-               var result = texture.GetTextureData();
+               GenerateHashFromImageData( texture );
+               return;
+            }
+
+            var result = SetupKeyForNameWithFallback( name, texture );
+
+            if( Settings.EnableTextureToggling || Settings.DetectDuplicateTextureNames )
+            {
+               if( result == null )
+               {
+                  result = texture.GetTextureData();
+               }
 
                _originalData = result.Data;
-               _key = HashHelper.Compute( _originalData );
-            }
-            else if( Settings.TextureHashGenerationStrategy == TextureHashGenerationStrategy.FromImageName )
-            {
-               var name = texture.GetTextureName( null ); // name may be duplicate, WILL be duplicate!
-               if( name == null ) return;
-
-               var result = SetupKeyForNameWithFallback( name, texture );
-
-               if( Settings.EnableTextureToggling || Settings.DetectDuplicateTextureNames )
-               {
-                  if( result == null )
-                  {
-                     result = texture.GetTextureData();
-                  }
-
-                  _originalData = result.Data;
-               }
-            }
-            else if( Settings.TextureHashGenerationStrategy == TextureHashGenerationStrategy.FromImageNameAndScene )
-            {
-               var name = texture.GetTextureName( null ); // name may be duplicate, WILL be duplicate!
-               if( name == null ) return;
-
-               name += "|" + TranslationScopeHelper.GetActiveSceneId().ToString();
-
-               var result = SetupKeyForNameWithFallback( name, texture );
-
-               if( Settings.EnableTextureToggling || Settings.DetectDuplicateTextureNames )
-               {
-                  if( result == null )
-                  {
-                     result = texture.GetTextureData();
-                  }
-
-                  _originalData = result.Data;
-               }
             }
          }
+         else if( Settings.TextureHashGenerationStrategy == TextureHashGenerationStrategy.FromImageNameAndScene )
+         {
+            var name = texture.GetTextureName( null ); // name may be duplicate, WILL be duplicate!
+            if( name == null ) return;
+
+            name += "|" + TranslationScopeHelper.GetActiveSceneId().ToString();
+
+            var result = SetupKeyForNameWithFallback( name, texture );
+
+            if( Settings.EnableTextureToggling || Settings.DetectDuplicateTextureNames )
+            {
+               if( result == null )
+               {
+                  result = texture.GetTextureData();
+               }
+
+               _originalData = result.Data;
+            }
+         }
+      }
+
+      private void GenerateHashFromImageData( Texture2D texture )
+      {
+         var result = texture.GetTextureData();
+         _originalData = result.Data;
+         _key = HashHelper.Compute( _originalData );
+      }
+
+      internal static void SetupRegex( string pattern )
+      {
+         if( pattern.IsNullOrWhiteSpace() )
+         {
+            return;
+         }
+
+         try
+         {
+            Regex.Match( "", pattern );
+         }
+         catch (ArgumentException)
+         {
+            XuaLogger.AutoTranslator.Error( "Invalid regex pattern for setting 'TextureHashDataPattern'!" );
+         }
+
+         _hashByDataPattern = new Regex( pattern, RegexOptions.Compiled );
       }
    }
 }

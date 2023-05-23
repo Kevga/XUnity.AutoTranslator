@@ -148,6 +148,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Configuration
       public static bool EnableLegacyTextureLoading;
       public static HashSet<string> DuplicateTextureNames;
       public static TextureHashGenerationStrategy TextureHashGenerationStrategy;
+      public static string TextureHashDataPattern;
       public static bool CacheTexturesInMemory;
       public static bool EnableSpriteHooking;
 
@@ -301,6 +302,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Configuration
                ?.Split( new[] { ';' }, StringSplitOptions.RemoveEmptyEntries ).ToHashSet() ?? new HashSet<string>();
             EnableLegacyTextureLoading = PluginEnvironment.Current.Preferences.GetOrDefault( "Texture", "EnableLegacyTextureLoading", false );
             TextureHashGenerationStrategy = PluginEnvironment.Current.Preferences.GetOrDefault( "Texture", "TextureHashGenerationStrategy", TextureHashGenerationStrategy.FromImageName );
+            TextureHashDataPattern = PluginEnvironment.Current.Preferences.GetOrDefault( "Texture", "TextureHashDataPattern", string.Empty );
             CacheTexturesInMemory = PluginEnvironment.Current.Preferences.GetOrDefault( "Texture", "CacheTexturesInMemory", true );
             EnableSpriteHooking = PluginEnvironment.Current.Preferences.GetOrDefault( "Texture", "EnableSpriteHooking", false );
 
@@ -343,6 +345,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Configuration
             EnabledTranslators = PluginEnvironment.Current.Preferences.GetOrDefault( "TranslationAggregator", "EnabledTranslators", string.Empty )
                ?.Split( new[] { ';' }, StringSplitOptions.RemoveEmptyEntries ).ToHashSet() ?? new HashSet<string>();
 
+            TextureTranslationInfo.SetupRegex( TextureHashDataPattern );
 
             EnableConsole = PluginEnvironment.Current.Preferences.GetOrDefault( "Debug", "EnableConsole", false );
 
