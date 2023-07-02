@@ -50,6 +50,9 @@ namespace XUnity.AutoTranslator.Plugin.Core.Utilities
          {
 #if MANAGED
             TextEditor editor = (TextEditor)GUIUtility.GetStateObject( typeof( TextEditor ), GUIUtility.keyboardControl );
+#elif IL2CPPBE2
+            var editor = GUIUtility.GetStateObject( Il2CppSystem.Type.GetType( typeof(TextEditor).ToString() ),
+               GUIUtility.keyboardControl ).Cast<TextEditor>();
 #else
             TextEditor editor = (TextEditor)GUIUtility.GetStateObject( Il2CppType.Of<TextEditor>(), GUIUtility.keyboardControl );
 #endif
