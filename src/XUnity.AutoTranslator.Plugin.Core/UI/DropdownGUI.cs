@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using XUnity.Common.Logging;
 
+#if IL2CPPBE2
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+#endif
+
 namespace XUnity.AutoTranslator.Plugin.Core.UI
 {
 
@@ -71,13 +75,21 @@ namespace XUnity.AutoTranslator.Plugin.Core.UI
          }
       }
 
+#if IL2CPPBE2
+      private bool _supportsScrollView = false;
+#else
       private bool _supportsScrollView = true;
+#endif
 
       private void ShowDropdown( float x, float y, float width, GUIStyle buttonStyle )
       {
          var rect = GUIUtil.R( x, y, width, _supportsScrollView && _viewModel.Options.Count * GUIUtil.RowHeight > MaxHeight ? MaxHeight : _viewModel.Options.Count * GUIUtil.RowHeight );
 
+#if IL2CPPBE2
+         GUIUtil.BeginArea( rect, GUIUtil.NoSpacingBoxStyle );
+#else
          GUILayout.BeginArea( rect, GUIUtil.NoSpacingBoxStyle );
+#endif
          try
          {
             if( _supportsScrollView )
@@ -92,7 +104,13 @@ namespace XUnity.AutoTranslator.Plugin.Core.UI
          }
 
          var style = _viewModel.CurrentSelection == null ? GUIUtil.NoMarginButtonPressedStyle : GUIUtil.NoMarginButtonStyle;
+#if IL2CPPBE2
+         var buttonRect = GUILayoutUtility.GetRect( _unselect, style );
+         var controlID = GUIUtility.GetControlID(GUI.s_ButonHash, FocusType.Passive, buttonRect);
+         if( GUI.DoControl(buttonRect, controlID, false, buttonRect.Contains(Event.current.mousePosition), _unselect, style) )
+#else
          if( GUILayout.Button( _unselect, style, null as GUILayoutOption[] ) )
+#endif
          {
             _viewModel.Select( null );
             _isShown = false;

@@ -225,5 +225,28 @@ namespace XUnity.AutoTranslator.Plugin.Core.UI
                || Input.GetMouseButton( 2 );
          }
       }
+
+#if IL2CPPBE2
+      //TODO: This might not be necessary if we get updated interop assemblies
+      public static void BeginArea( Rect rect )
+      {
+         BeginArea( rect, GUIStyle.none );
+      }
+
+
+      public static void BeginArea( Rect rect, GUIStyle style )
+      {
+         GUILayoutGroup guilayoutGroup = GUILayoutUtility.BeginLayoutArea(style, Il2CppSystem.Type.GetType( typeof(GUILayoutGroup).ToString() ));
+         bool flag = Event.current.type == EventType.Layout;
+         if (flag)
+         {
+            guilayoutGroup.resetCoords = true;
+            guilayoutGroup.minWidth = (guilayoutGroup.maxWidth = rect.width);
+            guilayoutGroup.minHeight = (guilayoutGroup.maxHeight = rect.height);
+            guilayoutGroup.rect = Rect.MinMaxRect(rect.xMin, rect.yMin, guilayoutGroup.rect.xMax, guilayoutGroup.rect.yMax);
+         }
+         GUI.BeginGroup( rect, style );
+      }
+#endif
    }
 }

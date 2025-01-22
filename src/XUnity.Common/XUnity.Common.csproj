@@ -189,4 +189,10 @@
         </Reference>
     </ItemGroup>
 
+    <Target Name="CopyToGameDir" AfterTargets="AfterBuild">
+        <Message Text="Copying $(OutDir)$(AssemblyName).dll to game folder" Importance="high" />
+        <Copy SourceFiles="$(OutDir)XUnity.Common.dll" DestinationFiles="D:\Games\priconner\BepInEx\core\XUnity.Common.dll" />
+        <Copy SourceFiles="$(OutDir)XUnity.Common.pdb" DestinationFiles="D:\Games\priconner\BepInEx\core\XUnity.Common.pdb" />
+    </Target>
+
 </Project>

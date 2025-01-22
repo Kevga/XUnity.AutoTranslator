@@ -87,6 +87,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Extensions
       {
          if( ui == null )
          {
+            XuaLogger.AutoTranslator.Info( "GetTextManipulator called with null argument." );
             return null;
          }
 
@@ -113,6 +114,12 @@ namespace XUnity.AutoTranslator.Plugin.Core.Extensions
                manipulator = new DefaultTextComponentManipulator( ui.GetType() );
             }
             Manipulators[ unityType ] = manipulator;
+         }
+
+         if ( manipulator == null )
+         {
+            XuaLogger.AutoTranslator.Warn( "Could not find a text manipulator for type: " + ui.GetType().FullName );
+            XuaLogger.AutoTranslator.Warn( "Could not find a text manipulator for path: " + ui.GetPath() );
          }
 
          return manipulator;
@@ -156,9 +163,19 @@ namespace XUnity.AutoTranslator.Plugin.Core.Extensions
                }
             }
 
-            inputField = go.GetFirstComponentInSelfOrAncestor( UnityTypes.UIInput?.UnityType );
-
-            return inputField != null;
+            if (UnityTypes.UIInput != null)
+            {
+               inputField = component.gameObject.GetFirstComponentInSelfOrAncestor(UnityTypes.UIInput?.UnityType);
+               if (inputField != null)
+               {
+                  if (UnityTypes.UIInput_Properties.DefaultText != null)
+                  {
+                     XuaLogger.AutoTranslator.Info( (string)UnityTypes.UIInput_Properties.DefaultText.Get(inputField) );
+                     var placeholder = (Component)UnityTypes.UIInput_Properties.DefaultText.Get(inputField);
+                     return !UnityObjectReferenceComparer.Default.Equals(placeholder, component);
+                  }
+               }
+            }
          }
 
          return false;
@@ -339,6 +356,12 @@ namespace XUnity.AutoTranslator.Plugin.Core.Extensions
       public static string GetText( this object ui, TextTranslationInfo info )
       {
          if( ui == null ) return null;
+         if( info.TextManipulator == null )
+         {
+            XuaLogger.AutoTranslator.Warn( "TextManipulator is null for type: " + ui.GetType().FullName );
+            XuaLogger.AutoTranslator.Warn( ui.GetPath() );
+            info.TextManipulator = ui.GetTextManipulator();
+         }
 
          TextGetterCompatModeHelper.IsGettingText = true;
          try
@@ -719,14 +742,20 @@ namespace XUnity.AutoTranslator.Plugin.Core.Extensions
 
          var type = ui.GetUnityType();
 
-         return ( ui.TryCastTo<Material>( out _ ) || ui.TryCastTo<SpriteRenderer>( out _ ) )
+         var isKnown = ( ui.TryCastTo<Material>( out _ ) || ui.TryCastTo<SpriteRenderer>( out _ ) )
             || ( UnityTypes.Image != null && UnityTypes.Image.IsAssignableFrom( type ) )
             || ( UnityTypes.RawImage != null && UnityTypes.RawImage.IsAssignableFrom( type ) )
             || ( UnityTypes.CubismRenderer != null && UnityTypes.CubismRenderer.IsAssignableFrom( type ) )
             || ( UnityTypes.UIWidget != null && !Equals( type, UnityTypes.UILabel?.UnityType ) && UnityTypes.UIWidget.IsAssignableFrom( type ) )
             || ( UnityTypes.UIAtlas != null && UnityTypes.UIAtlas.IsAssignableFrom( type ) )
             || ( UnityTypes.UITexture != null && UnityTypes.UITexture.IsAssignableFrom( type ) )
+            || ( UnityTypes.ParticleSystemRenderer != null && UnityTypes.ParticleSystemRenderer.IsAssignableFrom( type ) )
+            || ( UnityTypes.Renderer != null && UnityTypes.Renderer.IsAssignableFrom( type ) )
             || ( UnityTypes.UIPanel != null && UnityTypes.UIPanel.IsAssignableFrom( type ) );
+
+         if (!isKnown)
+            XuaLogger.AutoTranslator.Debug( $"IsKnownImageType: {type.Name} => {isKnown}" );
+         return isKnown;
       }
 
       public static string GetTextureName( this object texture, string fallbackName )
@@ -773,19 +802,18 @@ namespace XUnity.AutoTranslator.Plugin.Core.Extensions
 
       public static TextureDataResult GetTextureData( this Texture2D texture )
       {
-#warning Probably wont work with IL2CPP
          var start = Time.realtimeSinceStartup;
 
          var width = texture.width;
          var height = texture.height;
 
          byte[] data = null;
-         //bool nonReadable = texture.IsNonReadable();
-
-         //if( !nonReadable )
-         //{
-         //   data = texture.EncodeToPNGEx();
-         //}
+         // bool nonReadable = texture.IsNonReadable();
+         //
+         // if( !nonReadable )
+         // {
+         //    data = texture.EncodeToPNGEx();
+         // }
 
          if( data == null )
          {

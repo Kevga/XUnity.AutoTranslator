@@ -332,10 +332,20 @@ namespace XUnity.AutoTranslator.Plugin.Core
                   "<b>VERBOSE</b>\nThe plugin will print out success messages to the log in relation to translations.",
                   ToggleSilentMode, () => Settings.EnableSilentMode ),
                new ToggleViewModel(
+                  " Text Path Logging",
+                  "<b>ENABLED</b>\nThe plugin will print out the path to all text components that text are changed on.",
+                  "<b>DISABLED</b>\nThe plugin will not print out the path to all text components that text are changed on.",
+                  ToggleTextPathLogging, () => Settings.EnableTextPathLogging ),
+               new ToggleViewModel(
+                  " Texture Dumping",
+                  "<b>ENABLED</b>\nThe plugin will dump all textures loaded by the game to the disk.",
+                  "<b>DISABLED</b>\nThe plugin will not dump textures. \n\n<b>NOTE:</b> This is only useful for translators who want to translate textures.",
+                  ToggleTextureDumping, () => Settings.EnableTextureDumping ),
+               /*new ToggleViewModel(
                   " Translation Aggregator",
                   "<b>SHOWN</b>\nThe translation aggregator window is shown.",
                   "<b>HIDDEN</b>\nThe translation aggregator window is not shown.",
-                  ToggleTranslationAggregator, () => TranslationAggregatorWindow != null && TranslationAggregatorWindow.IsShown ),
+                  ToggleTranslationAggregator, () => TranslationAggregatorWindow != null && TranslationAggregatorWindow.IsShown ),*/
             },
             new DropdownViewModel<TranslatorDropdownOptionViewModel, TranslationEndpointManager>(
                "----",
@@ -382,6 +392,16 @@ namespace XUnity.AutoTranslator.Plugin.Core
       private void ToggleSilentMode()
       {
          Settings.SetSlientMode( !Settings.EnableSilentMode );
+      }
+
+      private void ToggleTextPathLogging()
+      {
+         Settings.SetTextPathLogging( !Settings.EnableTextPathLogging );
+      }
+
+      private void ToggleTextureDumping()
+      {
+         Settings.SetTextureDumping( !Settings.EnableTextureDumping );
       }
 
       private string GetCurrentEndpointStatus()
@@ -770,16 +790,8 @@ namespace XUnity.AutoTranslator.Plugin.Core
 
       internal void Hook_ImageChangedOnComponent( object source, ref Texture2D texture, bool isPrefixHooked, bool onEnable )
       {
-         if( !CallOrigin.ImageHooksEnabled ) return;
-         if( !source.IsKnownImageType() ) return;
-
          Sprite _ = null;
-         HandleImage( source, ref _, ref texture, isPrefixHooked );
-
-         if( onEnable )
-         {
-            CheckSpriteRenderer( source );
-         }
+        Hook_ImageChangedOnComponent( source, ref _, ref texture, isPrefixHooked, onEnable );
       }
 
       internal void Hook_ImageChangedOnComponent( object source, ref Sprite sprite, ref Texture2D texture, bool isPrefixHooked, bool onEnable )
@@ -980,6 +992,16 @@ namespace XUnity.AutoTranslator.Plugin.Core
 
       private void HandleImage( object source, ref Sprite sprite, ref Texture2D texture, bool isPrefixHooked )
       {
+         /*XuaLogger.AutoTranslator.Info( $"Handling image '{source.GetType().FullName}'" );
+         StackTrace stackTrace = new StackTrace();           // get call stack
+         StackFrame[] stackFrames = stackTrace.GetFrames();  // get method calls (frames)
+
+         // write call stack method names
+         foreach (StackFrame stackFrame in stackFrames)
+         {
+            Console.WriteLine(stackFrame.GetMethod().Name);   // write method name
+         }*/
+
          if( Settings.EnableTextureDumping )
          {
             try
@@ -1319,7 +1341,7 @@ namespace XUnity.AutoTranslator.Plugin.Core
          {
             CallOrigin.ImageHooksEnabled = false;
 
-            texture = texture ?? source.GetTexture();
+            texture = texture ? texture : source.GetTexture();
             if( texture == null ) return;
 
             var info = texture.GetOrCreateTextureTranslationInfo();

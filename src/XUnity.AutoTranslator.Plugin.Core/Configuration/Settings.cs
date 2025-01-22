@@ -419,6 +419,20 @@ namespace XUnity.AutoTranslator.Plugin.Core.Configuration
          Save();
       }
 
+      public static void SetTextPathLogging( bool enabled )
+      {
+         EnableTextPathLogging = enabled;
+         PluginEnvironment.Current.Preferences[ "Behaviour" ][ "EnableTextPathLogging" ].Value = enabled.ToString( CultureInfo.InvariantCulture );
+         Save();
+      }
+
+      public static void SetTextureDumping( bool enabled )
+      {
+         EnableTextureDumping = enabled;
+         PluginEnvironment.Current.Preferences[ "Texture" ][ "EnableTextureDumping" ].Value = enabled.ToString( CultureInfo.InvariantCulture );
+         Save();
+      }
+
       public static void SetTranslationAggregatorBounds( float width, float height )
       {
          Width = width;

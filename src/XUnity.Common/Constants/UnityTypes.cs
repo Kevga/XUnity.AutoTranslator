@@ -84,6 +84,7 @@ namespace XUnity.Common.Constants
       public static readonly TypeContainer UIPanel = FindType( "UIPanel" );
       public static readonly TypeContainer UIRect = FindType( "UIRect" );
       public static readonly TypeContainer UIInput = FindType( "UIInput" );
+      public static readonly TypeContainer UILabelOverflowMode = FindType( "UILabel.Overflow" );
 
       // FairyGUI
       public static readonly TypeContainer TextField = FindType( "FairyGUI.TextField" );
@@ -132,6 +133,8 @@ namespace XUnity.Common.Constants
       public static readonly TypeContainer Resources = FindType( "UnityEngine.Resources" );
       public static readonly TypeContainer AsyncOperation = FindType( "UnityEngine.AsyncOperation" );
       public static readonly TypeContainer TextAsset = FindType( "UnityEngine.TextAsset" );
+      public static readonly TypeContainer ParticleSystemRenderer = FindType( "UnityEngine.ParticleSystemRenderer" );
+      public static readonly TypeContainer Renderer = FindType( "UnityEngine.Renderer" );
       public static readonly Type HorizontalWrapMode = FindClrType( "UnityEngine.HorizontalWrapMode" );
       public static readonly Type TextOverflowModes = FindClrType( "TMPro.TextOverflowModes" );
       public static readonly Type TextAlignmentOptions = FindClrType( "TMPro.TextAlignmentOptions" );
@@ -228,6 +231,8 @@ namespace XUnity.Common.Constants
 
       public static class UILabel_Properties
       {
+         public static CachedProperty Font = UnityTypes.UILabel?.ClrType.CachedProperty( "font" );
+         public static CachedProperty FontSize = UnityTypes.UILabel?.ClrType.CachedProperty( "fontSize" );
          public static CachedProperty MultiLine = UnityTypes.UILabel?.ClrType.CachedProperty( "multiLine" );
          public static CachedProperty OverflowMethod = UnityTypes.UILabel?.ClrType.CachedProperty( "overflowMethod" );
          public static CachedProperty SpacingX = UnityTypes.UILabel?.ClrType.CachedProperty( "spacingX" );
@@ -255,6 +260,11 @@ namespace XUnity.Common.Constants
       public static class TMP_InputField_Properties
       {
          public static CachedProperty Placeholder = UnityTypes.TMP_InputField?.ClrType.CachedProperty( "placeholder" );
+      }
+
+      public static class UIInput_Properties
+      {
+         public static CachedProperty DefaultText = UnityTypes.UIInput?.ClrType.CachedProperty( "defaultText" );
       }
 
       public static class Font_Properties

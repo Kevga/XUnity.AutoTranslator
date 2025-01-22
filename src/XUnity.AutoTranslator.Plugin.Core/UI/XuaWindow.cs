@@ -55,7 +55,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.UI
 
          Input.ResetInputAxes();
       }
-      
+
       private void CreateWindowUI( int id )
       {
          try
@@ -126,7 +126,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.UI
             }
 
             // GROUP
-            groupHeight = GUIUtil.LabelHeight + ( GUIUtil.RowHeight * 2 ) + ( GUIUtil.ComponentSpacing * 2 );
+            /*groupHeight = GUIUtil.LabelHeight + ( GUIUtil.RowHeight * 2 ) + ( GUIUtil.ComponentSpacing * 2 );
             GUI.Box( GUIUtil.R( GUIUtil.HalfComponentSpacing, posy, WindowWidth - GUIUtil.ComponentSpacing, groupHeight ), "" );
 
             GUI.Label( GUIUtil.R( col1x, posy, col12, GUIUtil.LabelHeight ), "---- Select a Translator ----", GUIUtil.LabelCenter );
@@ -138,7 +138,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.UI
 
             GUI.Label( GUIUtil.R( col1x, posy, GUIUtil.LabelWidth, GUIUtil.LabelHeight ), "Fallback: " );
             float fallbackDropdownPosy = posy;
-            posy += GUIUtil.RowHeight + GUIUtil.ComponentSpacing;
+            posy += GUIUtil.RowHeight + GUIUtil.ComponentSpacing;*/
 
             // GROUP
             var labels = _viewModel.Labels;
@@ -155,11 +155,11 @@ namespace XUnity.AutoTranslator.Plugin.Core.UI
                posy += GUIUtil.RowHeight + GUIUtil.ComponentSpacing;
             }
 
-            var endpointDropdown = _endpointDropdown ?? ( _endpointDropdown = new DropdownGUI<TranslatorDropdownOptionViewModel, TranslationEndpointManager>( col2x, endpointDropdownPosy, col2, _viewModel.TranslatorDropdown ) );
+            /*var endpointDropdown = _endpointDropdown ?? ( _endpointDropdown = new DropdownGUI<TranslatorDropdownOptionViewModel, TranslationEndpointManager>( col2x, endpointDropdownPosy, col2, _viewModel.TranslatorDropdown ) );
             var isShown = endpointDropdown.OnGUI(true);
 
             var fallbackDropdown = _fallbackDropdown ?? ( _fallbackDropdown = new DropdownGUI<TranslatorDropdownOptionViewModel, TranslationEndpointManager>( col2x, fallbackDropdownPosy, col2, _viewModel.FallbackDropdown ) );
-            fallbackDropdown.OnGUI( !isShown );
+            fallbackDropdown.OnGUI( !isShown );*/
 
             GUI.Label( GUIUtil.R( col1x, posy, col12, GUIUtil.RowHeight * 5 ), GUI.tooltip, GUIUtil.LabelRich );
 

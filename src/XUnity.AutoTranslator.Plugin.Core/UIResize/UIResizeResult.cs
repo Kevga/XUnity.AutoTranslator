@@ -23,6 +23,9 @@
       public ITMP_Alignment AlignmentCommand { get; set; }
       public bool IsAlignmentCommandScoped { get; set; }
 
+      public NGUI_OverflowMode NGUIOverflowCommand { get; set; }
+      public bool IsNGUIOverflowCommandScoped { get; set; }
+
       public bool IsEmpty()
       {
          return ResizeCommand == null
@@ -31,6 +34,7 @@
             && HorizontalOverflowCommand == null
             && VerticalOverflowCommand == null
             && OverflowCommand == null
+            && NGUIOverflowCommand == null
             && AlignmentCommand == null;
       }
 
@@ -77,6 +81,12 @@
          {
             OverflowCommand = otherResult.OverflowCommand;
             IsOverflowCommandScoped = otherResult.IsOverflowCommandScoped;
+         }
+
+         if( otherResult.NGUIOverflowCommand != null && ( otherResult.IsNGUIOverflowCommandScoped || ( !otherResult.IsNGUIOverflowCommandScoped && !IsNGUIOverflowCommandScoped ) ) )
+         {
+            NGUIOverflowCommand = otherResult.NGUIOverflowCommand;
+            IsNGUIOverflowCommandScoped = otherResult.IsNGUIOverflowCommandScoped;
          }
 
          if( otherResult.AlignmentCommand != null && ( otherResult.IsAlignmentCommandScoped || ( !otherResult.IsAlignmentCommandScoped && !IsAlignmentCommandScoped ) ) )

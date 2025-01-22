@@ -466,7 +466,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Endpoints
 
                RemoveOngoingTranslation( job.Key );
 
-               if( !Settings.EnableSilentMode ) XuaLogger.AutoTranslator.Info( $"Completed: '{job.Key.TemplatedOriginal_Text}' => '{job.TranslatedText}'" );
+               if( !Settings.EnableSilentMode ) XuaLogger.AutoTranslator.Info( $"Completed: '{job.Key.TemplatedOriginal_Text}' => '{job.TranslatedText}' (endpoint: {job.Endpoint.Endpoint.FriendlyName})" );
 
                Manager.InvokeJobCompleted( job );
             }
@@ -503,7 +503,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.Endpoints
 
          RemoveOngoingTranslation( job.Key );
 
-         if( !Settings.EnableSilentMode ) XuaLogger.AutoTranslator.Info( $"Completed: '{job.Key.TemplatedOriginal_Text}' => '{job.TranslatedText}'" );
+         if( !Settings.EnableSilentMode ) XuaLogger.AutoTranslator.Info( $"Completed: '{job.Key.TemplatedOriginal_Text}' => '{job.TranslatedText}' (endpoint: {job.Endpoint.Endpoint.FriendlyName})" );
 
          Manager.InvokeJobCompleted( job );
       }

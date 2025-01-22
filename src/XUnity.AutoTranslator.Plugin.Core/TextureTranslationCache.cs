@@ -342,19 +342,7 @@ namespace XUnity.AutoTranslator.Plugin.Core
          try
          {
             var name = textureName.SanitizeForFileSystem();
-            var originalHash = HashHelper.Compute( data );
-
-            // allow hash and key to be the same; only store one of them then!
-            string fileName;
-            if( key == originalHash )
-            {
-               fileName = name + " [" + key + "].png";
-            }
-            else
-            {
-               fileName = name + " [" + key + "-" + originalHash + "].png";
-            }
-
+            var fileName = name + " [" + key + "].png";
             var fullName = Path.Combine( Settings.TexturesPath, fileName );
             File.WriteAllBytes( fullName, data );
             XuaLogger.AutoTranslator.Info( "Dumped texture file: " + fileName );

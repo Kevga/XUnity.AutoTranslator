@@ -166,7 +166,76 @@ namespace XUnity.AutoTranslator.Plugin.Core
 
          var type = ui.GetUnityType();
 
-         if( UnityTypes.Text != null && UnityTypes.Text.IsAssignableFrom( type ) )
+         if( UnityTypes.UILabel != null && UnityTypes.UILabel.UnityType.IsAssignableFrom( type ) )
+         {
+            var text = (Component)ui;
+
+            var componentWidth = GetComponentWidth( text );
+            var quarterScreenSize = Screen.width / 4;
+            var isComponentWide = componentWidth > quarterScreenSize;
+
+            var clrType = ui.GetType();
+            var overflowModeProperty = clrType.CachedProperty( "overflowMethod" );
+            var originalOverflowMode = overflowModeProperty?.Get( ui );
+            var isUntouched = _unresize == null;
+
+            if( !cache.HasAnyResizeCommands )
+            {
+               return;
+            }
+
+            var segments = text.gameObject.GetPathSegments();
+            var scope = TranslationScopeHelper.GetScope( ui );
+
+            if( !cache.TryGetUIResize( segments, scope, out var result ) )
+            {
+               return;
+            }
+
+            if( result.OverflowCommand != null )
+            {
+               if( overflowModeProperty != null )
+               {
+                  var newOverflowMode = result.OverflowCommand.GetMode();
+                  if( newOverflowMode.HasValue )
+                  {
+                     overflowModeProperty.Set( ui, newOverflowMode );
+
+                     if( isUntouched )
+                     {
+                        _unresize = g =>
+                        {
+                           overflowModeProperty.Set( g, originalOverflowMode );
+                        };
+                     }
+                  }
+               }
+            }
+
+            if( result.ResizeCommand != null )
+            {
+               var currentFontSize = (int?)UnityTypes.UILabel_Properties.FontSize.Get( ui );
+
+               if( currentFontSize.HasValue && !Equals( _alteredFontSize, currentFontSize ) )
+               {
+                  var newFontSize = result.ResizeCommand.GetSize( currentFontSize.Value );
+                  if( newFontSize.HasValue )
+                  {
+                     UnityTypes.UILabel_Properties.FontSize.Set( ui, newFontSize.Value );
+                     _alteredFontSize = newFontSize.Value;
+
+                     if( isUntouched )
+                     {
+                        _unresize += g =>
+                        {
+                           UnityTypes.UILabel_Properties.FontSize.Set( g, currentFontSize );
+                        };
+                     }
+                  }
+               }
+            }
+         }
+         else if( UnityTypes.Text != null && UnityTypes.Text.IsAssignableFrom( type ) )
          {
             var text = (Component)ui;
 

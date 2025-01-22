@@ -33,6 +33,7 @@ namespace XUnity.AutoTranslator.Plugin.Core.UIResize
                typeof(UGUI_VerticalOverflow),
                typeof(TMP_Overflow),
                typeof(TMP_Alignment),
+               //typeof(NGUI_OverflowMode),
             };
 
             //var commands = typeof( AutoTranslationPlugin ).Assembly.GetTypes()

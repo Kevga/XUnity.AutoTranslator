@@ -24,6 +24,8 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks
          typeof( Image_material_Hook ),
          typeof( RawImage_texture_Hook ),
          typeof( Cursor_SetCursor_Hook ),
+         //typeof( Renderer_material_Hook ),
+         //typeof( ParticleSystemRenderer_material_Hook ),
 
          // fallback hooks on material (Prefix hooks)
          typeof( Material_mainTexture_Hook ),
@@ -614,6 +616,49 @@ namespace XUnity.AutoTranslator.Plugin.Core.Hooks
          Postfix( __instance );
       }
 #endif
+   }
+
+   internal static class Renderer_material_Hook
+   {
+      static bool Prepare( object instance )
+      {
+         return UnityTypes.Renderer != null;
+      }
+
+      static MethodBase TargetMethod( object instance )
+      {
+         return AccessToolsShim.Property( UnityTypes.Renderer?.ClrType, "material" )?.GetSetMethod();
+      }
+
+      public static void Postfix( object __instance, object value)
+      {
+         Texture2D texture = null;
+         /*value.TryCastTo(out Material material);
+         var texture = material.GetTexture();
+         XuaLogger.AutoTranslator.Debug( texture != null
+            ? $"Hooking Renderer.material for texture: {texture.name}"
+            : $"Hooking Renderer.material for texture: null" );*/
+         AutoTranslationPlugin.Current.Hook_ImageChangedOnComponent( __instance, ref texture, false, false );
+      }
+   }
+
+   internal static class ParticleSystemRenderer_material_Hook
+   {
+      static bool Prepare( object instance )
+      {
+         return UnityTypes.ParticleSystemRenderer != null;
+      }
+
+      static MethodBase TargetMethod( object instance )
+      {
+         return AccessToolsShim.Property( UnityTypes.ParticleSystemRenderer?.ClrType, "material" )?.GetSetMethod();
+      }
+
+      public static void Postfix( object __instance, object value )
+      {
+         Texture2D _ = null;
+         AutoTranslationPlugin.Current.Hook_ImageChangedOnComponent( __instance, ref _, false, false );
+      }
    }
 
    internal static class UISprite_atlas_Hook

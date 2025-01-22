@@ -206,7 +206,13 @@ namespace XUnity.AutoTranslator.Plugin.Core.UI
 
          float boxWidth = _viewModel.Width - GUIUtil.ComponentSpacing;
          float boxHeight = _viewModel.Height - GUIUtil.LabelHeight;
+
+#if IL2CPPBE2
+         GUIUtil.BeginArea( GUIUtil.R( GUIUtil.HalfComponentSpacing, posy, boxWidth, boxHeight ));
+#else
          GUILayout.BeginArea( GUIUtil.R( GUIUtil.HalfComponentSpacing, posy, boxWidth, boxHeight ) );
+#endif
+
          positioned.ScrollPosition = GUILayout.BeginScrollView( positioned.ScrollPosition, GUI.skin.box );
 
          foreach( var text in texts )
